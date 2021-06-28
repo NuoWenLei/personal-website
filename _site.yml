@@ -9,4 +9,8 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "Projects"
+      menu:
+        - text: "Covid Analysis and AI Dev"
+          href: covid_analysis.html
 output: distill::distill_article
