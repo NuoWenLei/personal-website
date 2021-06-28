@@ -11,6 +11,8 @@ navbar:
       href: about.html
     - text: "Projects"
       menu:
-        - text: "Covid Analysis and AI Dev"
+        - text: "COVID Analysis and AI Dev"
           href: covid_analysis.html
+        - text: "Epilepsy AI Web App"
+          href: epilepsy_webapp.html
 output: distill::distill_article
