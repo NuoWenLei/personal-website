@@ -1,5 +1,5 @@
 ---
-title: "Nuo Wen Lei's Personal Website"
+title: "Overview"
 description: |
   A gallery of my projects in highschool
 site: distill::distill_website
@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Shanghai Property Analysis Website
 - Social Justice Website
 
-## Overview
+## Quick Gallery
 
 <div>
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}

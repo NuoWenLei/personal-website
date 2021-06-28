@@ -4,16 +4,16 @@
       "path": "about.html",
       "title": "About",
       "author": [],
-      "contents": "\n\n\n\n",
-      "last_modified": "2021-06-29T02:47:38+08:00"
+      "contents": "\nAbout this site\nThis website is a gallery of the projects I’ve done over the past 3-4 years in highschool. It kind of shows how my interests changed overtime from Computer Science to web design to data science and AI.\nI hope you find something interesting or just enjoy your time on this website!\nAbout Me\nI’m Nuo Wen Lei from Shanghai, studying in the 2022 class of Concord Academy, MA.\nI have an interest in Computer Science, Data Science, and Behavioral Sciences, and I like to play tennis, watch anime, and eat delicious food!\nGithub\nLinkedIn\nInstagram: nuowenlei\nDiscord: NuoWenLei#0308\n\n\n\n",
+      "last_modified": "2021-06-29T04:18:02+08:00"
     },
     {
       "path": "index.html",
-      "title": "Nuo Wen Lei's Personal Website",
+      "title": "Overview",
       "description": "A gallery of my projects in highschool\n",
       "author": [],
-      "contents": "\nTable of Content\nCOVID Death Trend Analysis and AI Prediction\nEpilepsy Detection AI Web App\nInvestment Bot\nMask Detection AI Web App (with link to gdrive presentation video)\nPAC Donation Analysis Website\nR Tutorial Package Contribution\nShanghai Property Analysis Website\nSocial Justice Website\nOverview\n\n\n\n\nCOVID Death Trend Analysis and AI Prediction  After an initial analysis of the COVID death trends and trial of basic AI methods, I dive deeper into finding other AI techniques to predict the death trends.\n\n\n\n\n\n\n\nEpilepsy Detection AI Web App  I hosted an AI I created with friends that determines if someone is experiencing epilepsy based on EEG brain waves.\n\n\n\n\n\n\n\nInvestment Bot  I created a pipeline that analyzes web data and invests on an Investopedia simulator.\n\n\n\n\n\n\n\nMask Detection AI Web App  I created and hosted an AI on the internet that detects if people are wearing masks in an image.\n\n\n\n\n\n\n\nPAC Donation Analysis Website  I analyzed and visualized the relationship between foreign-connected company donations with US Congress representation.\n\n\n\n\n\n\n\nR Tutorial Package Contribution  Over the summer of 2021, I work with a professor to help improve an R tutorial package.\n\n\n\n\n\n\n\nShanghai Property Analysis Website  I created a website that visualizes the relationship between properties and position in Shanghai.\n\n\n\n\n\n\n\nSocial Justice Website  With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.\n\n\n\n\n",
-      "last_modified": "2021-06-29T04:12:29+08:00"
+      "contents": "\nTable of Content\nCOVID Death Trend Analysis and AI Prediction\nEpilepsy Detection AI Web App\nInvestment Bot\nMask Detection AI Web App (with link to gdrive presentation video)\nPAC Donation Analysis Website\nR Tutorial Package Contribution\nShanghai Property Analysis Website\nSocial Justice Website\nQuick Gallery\n\n\n\n\nCOVID Death Trend Analysis and AI Prediction  After an initial analysis of the COVID death trends and trial of basic AI methods, I dive deeper into finding other AI techniques to predict the death trends.\n\n\n\n\n\n\n\nEpilepsy Detection AI Web App  I hosted an AI I created with friends that determines if someone is experiencing epilepsy based on EEG brain waves.\n\n\n\n\n\n\n\nInvestment Bot  I created a pipeline that analyzes web data and invests on an Investopedia simulator.\n\n\n\n\n\n\n\nMask Detection AI Web App  I created and hosted an AI on the internet that detects if people are wearing masks in an image.\n\n\n\n\n\n\n\nPAC Donation Analysis Website  I analyzed and visualized the relationship between foreign-connected company donations with US Congress representation.\n\n\n\n\n\n\n\nR Tutorial Package Contribution  Over the summer of 2021, I work with a professor to help improve an R tutorial package.\n\n\n\n\n\n\n\nShanghai Property Analysis Website  I created a website that visualizes the relationship between properties and position in Shanghai.\n\n\n\n\n\n\n\nSocial Justice Website  With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.\n\n\n\n\n",
+      "last_modified": "2021-06-29T04:18:03+08:00"
     }
   ],
   "collections": []
