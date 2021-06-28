@@ -1,0 +1,121 @@
+---
+title: "Nuo Wen Lei's Personal Website"
+description: |
+  A gallery of my projects in highschool
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+# Learn more about publishing to GitHub Pages at:
+# https://rstudio.github.io/distill/publish_website.html#github-pages
+
+```
+
+## Table of Content
+- COVID Death Trend Analysis and AI Prediction
+- Epilepsy Detection AI Web App
+- Investment Bot
+- Mask Detection AI Web App (with link to gdrive presentation video)
+- PAC Donation Analysis Website
+- R Tutorial Package Contribution
+- Shanghai Property Analysis Website
+- Social Justice Website
+
+## Overview
+
+<div>
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
+knitr::include_graphics("static/pictures/COVID-death-trend.png")
+```
+**COVID Death Trend Analysis and AI Prediction** <br> After an initial analysis of the COVID death trends and trial of basic AI methods, I dive deeper into finding other AI techniques to predict the death trends.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div>
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
+knitr::include_graphics("static/pictures/epilepsy-webapp.png")
+```
+**Epilepsy Detection AI Web App** <br> I hosted an AI I created with friends that determines if someone is experiencing epilepsy based on EEG brain waves.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div>
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
+knitr::include_graphics("static/pictures/investment-bot.png")
+```
+**Investment Bot** <br> I created a pipeline that analyzes web data and invests on an Investopedia simulator.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div>
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
+knitr::include_graphics("static/pictures/mask-webapp.png")
+```
+**Mask Detection AI Web App** <br> I created and hosted an AI on the internet that detects if people are wearing masks in an image.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div>
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
+knitr::include_graphics("static/pictures/pac-web.png")
+```
+**PAC Donation Analysis Website** <br> I analyzed and visualized the relationship between foreign-connected company donations with US Congress representation.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div>
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
+knitr::include_graphics("static/pictures/ppbds-package.png")
+```
+**R Tutorial Package Contribution** <br> Over the summer of 2021, I work with a professor to help improve an R tutorial package.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div>
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
+knitr::include_graphics("static/pictures/shanghai-property.png")
+```
+**Shanghai Property Analysis Website** <br> I created a website that visualizes the relationship between properties and position in Shanghai.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div>
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
+knitr::include_graphics("static/pictures/takeactionmass.png")
+```
+**Social Justice Website** <br> With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.
+</div>
+
+
+
+
+
+
+
