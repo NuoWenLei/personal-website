@@ -14,13 +14,13 @@ By combining a face detection model and my personal mask detection model, I crea
 knitr::include_graphics("static/pictures/mask-1.png")
 ```
 
-I then hosted this AI on a website for people to try out for themselves. I also presented this project as a demo for a [presentation about teaching AI concepts](https://youtu.be/hXrQvJOiV2A) to CA's robotics club members.
+I then hosted this AI on a website for people to try out for themselves. I also presented this project as a demo for a [presentation about teaching AI concepts](https://youtu.be/0rtiLMUj2ZM) to CA's robotics club members.
+
+Feel free to try this AI out for yourself [**here**](https://mask-detector-web.herokuapp.com/). Note that it does take a while to load because the AI model size is big.
 
 ```{r, fig.cap = "Result after mask detection AI processed image"}
 knitr::include_graphics("static/pictures/mask-2.png")
 ```
-
-Feel free to try this AI out for yourself [**here**](https://mask-detector-web.herokuapp.com/). Note that it does take a while to load because the AI model size is big.
 
 
 
