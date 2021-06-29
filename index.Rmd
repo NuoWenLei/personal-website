@@ -1,5 +1,5 @@
 ---
-title: "Nuo Wen Lei's Personal Projects"
+title: "Personal Projects"
 description: |
   A gallery of my projects in highschool
 site: distill::distill_website
