@@ -15,4 +15,14 @@ navbar:
           href: covid_analysis.html
         - text: "Epilepsy AI Web App"
           href: epilepsy_webapp.html
+        - text: "Investment Bot"
+          href: investment_bot.html
+        - text: "Mask AI Web App"
+          href: mask_webapp.html
+        - text: "PAC Analysis"
+          href: pac_analysis.html
+        - text: "Shanghai Property Analysis"
+          href: shanghai_property.html
+        - text: "Social Justice Website"
+          href: social_justice.html
 output: distill::distill_article

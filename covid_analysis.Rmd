@@ -8,8 +8,6 @@ library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## About the Project
-
 This project started off as my final project for an IBM Data Science MOOC course. I used basic AI methods like Long Short Term Memory (LSTM) models to try to predict COVID death trends.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DyjopF7Bq7Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

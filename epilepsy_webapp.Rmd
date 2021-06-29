@@ -8,8 +8,6 @@ library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## About the Project
-
 With friends from an online AI course, [Inspirit AI](https://www.inspiritai.com/), we trained an AI to detect if a patient is experiencing epilepsy based on their EEG brain wave graph.
 
 ```{r, fig.cap = "Output of AI shows its confidence in its decision while processing the graph"}
@@ -17,3 +15,5 @@ knitr::include_graphics("static/pictures/epilepsy-graph.png")
 ```
 
 We were able to reach an accuracy of **89%**, which is definitely not accurate enough to be used professionally. However, throughout the project we learned a lot about the ethical concerns surrounding AI's influence on major fields as well as problems with modern-day AI's explain-ability that discourage people to trust its results.
+
+If you are interested, please do [**click here**](https://epilepsy-detection.herokuapp.com/) to try it out for yourself. Note that it does take a while to load because the AI model size is big.
