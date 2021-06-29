@@ -4,12 +4,24 @@ output: distill::distill_article
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+By combining a face detection model and my personal mask detection model, I created an AI that can individually detect for each person in a photo if they are wearing a mask.
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+```{r, fig.cap = "Preview of uploaded image before processing"}
+knitr::include_graphics("static/pictures/mask-1.png")
+```
+
+I then hosted this AI on a website for people to try out for themselves. I also presented this project as a demo for a [presentation about teaching AI concepts](https://youtu.be/hXrQvJOiV2A) to CA's robotics club members.
+
+```{r, fig.cap = "Result after mask detection AI processed image"}
+knitr::include_graphics("static/pictures/mask-2.png")
+```
+
+Feel free to try this AI out for yourself [**here**](https://mask-detector-web.herokuapp.com/). Note that it does take a while to load because the AI model size is big.
+
 
 
 

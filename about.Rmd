@@ -8,13 +8,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## About this site
 
-This website is a gallery of the projects I've done over the past 3-4 years in highschool. It kind of shows how my interests changed overtime from Computer Science to web design to data science and AI.
+This website is a gallery of the projects I've done over the past 3-4 years in highschool. It kind of shows how my interests developed overtime from computer science to web design to data science and AI.
 
 I hope you find something interesting or just enjoy your time on this website!
 
 ## About Me
 
-I'm [Nuo Wen Lei](https://github.com/NuoWenLei) from Shanghai, studying in the 2022 class of Concord Academy, MA.
+I'm Nuo Wen Lei from Shanghai, studying in the 2022 class of Concord Academy, MA.
 
 I have an interest in Computer Science, Data Science, and Behavioral Sciences, and I like to play tennis, watch anime, and eat delicious food!
 

@@ -18,19 +18,19 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Table of Content
-- COVID Death Trend Analysis and AI Prediction
-- Epilepsy Detection AI Web App
-- Investment Bot
-- Mask Detection AI Web App (with link to gdrive presentation video)
-- PAC Donation Analysis Website
-- R Tutorial Package Contribution
-- Shanghai Property Analysis Website
-- Social Justice Website
+- [COVID Death Trend Analysis and AI Prediction](#covid_analysis)
+- [Epilepsy Detection AI Web App](#epilepsy_webapp)
+- [Investment Bot](#investment_bot)
+- [Mask Detection AI Web App](#mask_webapp)
+- [PAC Donation Analysis Website](#pac_analysis)
+- [R Tutorial Package Contribution](#r_package)
+- [Shanghai Property Analysis Website](#shanghai_property)
+- [Social Justice Website](#social_justice)
 
 ## Quick Gallery
 ### Go to Projects tab for more details on each individual project
 
-<div>
+<div id = "covid_analysis">
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
 knitr::include_graphics("static/pictures/COVID-death-trend.png")
 ```
@@ -41,7 +41,7 @@ knitr::include_graphics("static/pictures/COVID-death-trend.png")
 <hr>
 </div>
 
-<div>
+<div id = "epilepsy_webapp">
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
 knitr::include_graphics("static/pictures/epilepsy-webapp.png")
 ```
@@ -52,7 +52,7 @@ knitr::include_graphics("static/pictures/epilepsy-webapp.png")
 <hr>
 </div>
 
-<div>
+<div id = "investment_bot">
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
 knitr::include_graphics("static/pictures/investment-bot.png")
 ```
@@ -63,7 +63,7 @@ knitr::include_graphics("static/pictures/investment-bot.png")
 <hr>
 </div>
 
-<div>
+<div id = "mask_webapp">
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
 knitr::include_graphics("static/pictures/mask-webapp.png")
 ```
@@ -74,7 +74,7 @@ knitr::include_graphics("static/pictures/mask-webapp.png")
 <hr>
 </div>
 
-<div>
+<div id = "pac_analysis">
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
 knitr::include_graphics("static/pictures/pac-web.png")
 ```
@@ -85,7 +85,7 @@ knitr::include_graphics("static/pictures/pac-web.png")
 <hr>
 </div>
 
-<div>
+<div id = "r_package">
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
 knitr::include_graphics("static/pictures/ppbds-package.png")
 ```
@@ -96,7 +96,7 @@ knitr::include_graphics("static/pictures/ppbds-package.png")
 <hr>
 </div>
 
-<div>
+<div id = "shanghai_property">
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
 knitr::include_graphics("static/pictures/shanghai-property.png")
 ```
@@ -107,11 +107,11 @@ knitr::include_graphics("static/pictures/shanghai-property.png")
 <hr>
 </div>
 
-<div>
+<div id = "social_justice">
 ```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
 knitr::include_graphics("static/pictures/takeactionmass.png")
 ```
-[**Social Justice Website**](takeactionmass.html) <br> With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.
+[**Social Justice Website**](social_justice.html) <br> With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.
 </div>
 
 

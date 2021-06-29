@@ -4,14 +4,16 @@ output: distill::distill_article
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+For the final project of a data science course about R, I picked my own topic of research to be about foreign-connected Political Action Committee donations for US political parties.
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+Please feel free to [**visit the project page**](https://nuowenlei.github.io/pac-influence/) and see for yourself.
 
+```{r, fig.cap = "Data source for the project"}
+knitr::include_graphics("static/pictures/pac-opensecrets.png")
+```
 
-
-
-
+In the project, I scrape data from [OpenSecrets](https://www.opensecrets.org/) and process it to produce visualizations comparing donation amounts and Congress representations between 2000 and 2020.

@@ -16,7 +16,7 @@ I've made websites at this point, but I've never really applied my study in data
 knitr::include_graphics("static/pictures/investment-yahoo.png")
 ```
 
-Using python and its various libraries, I created a simple pipeline to extract and analyze online data and then invest based on its results.
+Using python and its various libraries, I created a simple pipeline to extract and analyze online data and then invest based on its results. Then I attached this pipeline to a web server that will run this pipeline every week.
 
 ```{r, fig.cap = "Visualization of investment pipeline"}
 knitr::include_graphics("static/pictures/investment-pipeline.png")
