@@ -4,14 +4,22 @@ output: distill::distill_article
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+Witnessing the coverage of George Floyd's death and the effects that followed, though I was stuck in Hong Kong, made me want to contribute somehow to the social justice movement. That opportunity came when a friend of mine reached out to me with the idea of creating some kind of website that could help the movement.
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+```{r, fig.cap = "Main page of the website"}
+knitr::include_graphics("static/pictures/takeactionmass.png")
+```
 
+After some deliberation, we set a clear goal of making this website's main audience the people who want to help but don't know how to. The idea is to aggregate a lot of ways that people can help, allowing people who visit easy access to methods of contributing as well as sources to stay inform.
 
+```{r, fig.cap = "News page of the website"}
+knitr::include_graphics("static/pictures/takeactionmass-1.png")
+```
 
+Please feel free to visit [**TakeActionMass**](https://www.takeactionmass.com/) yourself!
 
 

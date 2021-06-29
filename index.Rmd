@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-## Table of Content
+## Table of Contents
 - [COVID Death Trend Analysis and AI Prediction](#covid_analysis)
 - [Epilepsy Detection AI Web App](#epilepsy_webapp)
 - [Investment Bot](#investment_bot)

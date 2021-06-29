@@ -4,14 +4,26 @@ output: distill::distill_article
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+As part of a school course about urban planning, I decided to analyze the surrounding area of where I lived. It first started off as a small area analysis, but as my interest grew into Shanghai's urban planning and as my direction of research became clearer, I scraped data from online property-selling sites to produce a map that visualizes different attributes of properties and their positions in Shanghai.
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+```{r, fig.cap = "Distribution of district property colored by **year of construction** (red: old, green: new)"}
+knitr::include_graphics("static/pictures/shanghai-property.png")
+```
 
+Users can choose what attribute of the property to visualize and gain an insightful overview of the city distribution.
 
+```{r, fig.cap = "Distribution of district property colored by **average price per square meter** (red: low, green: high)"}
+knitr::include_graphics("static/pictures/shanghai-1.png")
+```
 
+With this map, I also considered stakeholders and their interconnectivity in this area.
 
+```{r, fig.cap = "Graph of profit relationships between stakeholders in the Shanghai community"}
+knitr::include_graphics("static/pictures/shanghai-2.png")
+```
 
+Overall, I'd say this project in the scope of my school course was a success. Through this experience, I've learned that the world of urban planning is vast. This project has only glimpsed at the peak of the iceberg and if opportunities arise in the future for me to dive deeper into the hidden effects and influences of urban planning, I'd gladly pursue it!
