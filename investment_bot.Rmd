@@ -28,5 +28,7 @@ knitr::include_graphics("static/pictures/investment-pipeline.png")
 
 **Investment Decision** - Based on the data collected, each feature is assigned a weightage in the decision-making process, allowing each stock to be "scored". Then the pipeline invests in the 5 highest-scoring stocks on an Investopedia simulator.
 
+The next step for this project is to integrate an ML or AI model into the pipeline, so that the pipeline can essentially learn and improve over time.
+
 
 

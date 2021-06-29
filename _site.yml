@@ -21,6 +21,8 @@ navbar:
           href: mask_webapp.html
         - text: "PAC Analysis"
           href: pac_analysis.html
+        - text: "R Data Science Tutorials"
+          href: r_package.html
         - text: "Shanghai Property Analysis"
           href: shanghai_property.html
         - text: "Social Justice Website"

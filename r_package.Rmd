@@ -1,16 +1,32 @@
 ---
-title: "PPBDS R Package Contribution"
+title: "R Data Science Tutorial Package Contribution"
 output: distill::distill_article
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+At the end of the 2021 school year, I joined a [free data science course hosted by professor David Kane](https://bootcamp.davidkane.info/). During which, he reached out to me to ask if I'd like to work with him over the summer to help improve his R tutorial package, [Preceptor's Primer for Bayesian Data Science](https://ppbds.github.io/primer/index.html).
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+```{r, fig.cap = "Chapter 1 of the Primer"}
+knitr::include_graphics("static/pictures/ppbds-1.png")
+```
 
+I gladly joined him with a few other volunteers. I started off by just catching and editing small mistakes in the tutorials reported by users, then I got the opportunity to write the tutorial, Data Webscraping, myself. And afterwards, I was allowed to make some larger changes to tutorials in general.
+
+```{r, fig.cap = "Side navigation bar of the Data Webscraping tutorial"}
+knitr::include_graphics("static/pictures/ppbds-2.png")
+```
+
+First, I was assigned to add some quality-of-life features for better user experience. Then I helped make the process of creating tutorials more streamlined and simple by adding pre-defined templates and keyboard shortcuts to take the tedious work of writing each exercise individually off the tutorial-makers.
+
+```{r, fig.cap = "My Github contributions to the package"}
+knitr::include_graphics("static/pictures/ppbds-3.png")
+```
+
+My next step is to work on improving instructions of the package as well as understand the reason behind some of the common problems that arise while making tutorials.
 
 
 
