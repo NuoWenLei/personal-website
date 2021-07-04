@@ -1,7 +1,5 @@
 ---
 title: "Personal Projects"
-description: |
-  A gallery of my projects in highschool
 site: distill::distill_website
 ---
 
@@ -17,15 +15,27 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
+## About
+<div>
+```{r, echo=FALSE,out.width="30%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
+knitr::include_graphics("static/pictures/personal_photo.jpg")
+```
+Hello, I'm Nuo Wen Lei from Shanghai, studying in the 2022 class of Concord Academy, MA. My personal interests mainly lies in the realm of understanding humanities and the world around me through the lens of data and logic. Other hobbies of mine include tennis and a whole lot of eating, chicken wings and ramen being my favorites.
+<br><br>
+This website is a gallery of the projects I've done over the past 3-4 years in highschool. It shows how my interests developed overtime from computer science to web design to data science and AI.
+<br><br>
+I hope you find something interesting or just enjoy your time on this website!
+</div>
+
 ## Table of Contents
-- [COVID Death Trend Analysis and AI Prediction](#covid_analysis)
-- [Epilepsy Detection AI Web App](#epilepsy_webapp)
-- [Investment Bot](#investment_bot)
-- [Mask Detection AI Web App](#mask_webapp)
-- [PAC Donation Analysis Website](#pac_analysis)
-- [R Tutorial Package Contribution](#r_package)
-- [Shanghai Property Analysis Website](#shanghai_property)
-- [Social Justice Website](#social_justice)
+- [COVID Death Trend Analysis and AI Prediction](covid_analysis.html)
+- [Epilepsy Detection AI Web App](epilepsy_webapp.html)
+- [Investment Bot](investment_bot.html)
+- [Mask Detection AI Web App](mask_webapp.html)
+- [PAC Donation Analysis Website](pac_analysis.html)
+- [R Tutorial Package Contribution](r_package.html)
+- [Shanghai Property Analysis Website](shanghai_property.html)
+- [Social Justice Website](social_justice.html)
 
 ## Quick Overview
 ### Go to Projects tab for more details on each individual project

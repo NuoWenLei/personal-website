@@ -8,6 +8,11 @@ library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+Associated Links:
+
+- [PAC Influence Project Website](https://nuowenlei.github.io/pac-influence/)
+- [OpenSecrets](https://www.opensecrets.org/)
+
 For the final project of a data science course about R, I picked my own topic of research to be about foreign-connected Political Action Committee donations for US political parties.
 
 Please feel free to [**visit the project page**](https://nuowenlei.github.io/pac-influence/) and see for yourself.

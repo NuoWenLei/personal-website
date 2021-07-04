@@ -8,6 +8,11 @@ library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+Associated Links:
+
+- [Mask Detection Web App](https://mask-detector-web.herokuapp.com/)
+- [Image-processing AI Concept Presentation](https://youtu.be/0rtiLMUj2ZM)
+
 By combining a face detection model and my personal mask detection model, I created an AI that can individually detect for each person in a photo if they are wearing a mask.
 
 ```{r, fig.cap = "Preview of uploaded image before processing"}

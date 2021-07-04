@@ -8,6 +8,11 @@ library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+Associated Links:
+
+- [Epilepsy Detection Web App](https://epilepsy-detection.herokuapp.com/)
+- [Inspirit AI Main Page](https://www.inspiritai.com/)
+
 With friends from an online AI course, [Inspirit AI](https://www.inspiritai.com/), we trained an AI to detect if a patient is experiencing epilepsy based on their EEG brain wave graph.
 
 ```{r, fig.cap = "Output of AI shows its confidence in its decision while processing the graph"}

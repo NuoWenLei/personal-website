@@ -8,6 +8,11 @@ library(knitr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+Associated Links:
+
+- [Preceptor's Primer for Bayesian Data Science](https://ppbds.github.io/primer/index.html)
+- [Data Science Course hosted by professor David Kane](https://bootcamp.davidkane.info/)
+
 At the end of the 2021 school year, I joined a [free data science course hosted by professor David Kane](https://bootcamp.davidkane.info/). During which, he reached out to me to ask if I'd like to work with him over the summer to help improve his R tutorial package, [Preceptor's Primer for Bayesian Data Science](https://ppbds.github.io/primer/index.html).
 
 ```{r, fig.cap = "Chapter 1 of the Primer"}
