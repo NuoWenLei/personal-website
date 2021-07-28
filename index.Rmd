@@ -30,18 +30,20 @@ I hope you find something interesting or just enjoy your time on this website!
 ## Table of Contents
 - [COVID Death Trend Analysis and AI Prediction](covid_analysis.html)
 - [Epilepsy Detection AI Web App](epilepsy_webapp.html)
+- [Hackathon Winning Project - Explorantine](explorantine.html)
 - [Investment Bot](investment_bot.html)
 - [Mask Detection AI Web App](mask_webapp.html)
 - [PAC Donation Analysis Website](pac_analysis.html)
 - [R Tutorial Package Contribution](r_package.html)
 - [Shanghai Property Analysis Website](shanghai_property.html)
 - [Social Justice Website](social_justice.html)
+- [WeChat Miniprogram - WangWang](wangwang.html)
 
 ## Quick Overview
 ### Go to Projects tab for more details on each individual project
 
 <div id = "covid_analysis">
-```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
 knitr::include_graphics("static/pictures/COVID-death-trend.png")
 ```
 [**COVID Death Trend Analysis and AI Prediction**](covid_analysis.html) <br> After an initial analysis of the COVID death trends and trial of basic AI methods, I dive deeper into finding other AI techniques to predict the death trends.
@@ -52,10 +54,21 @@ knitr::include_graphics("static/pictures/COVID-death-trend.png")
 </div>
 
 <div id = "epilepsy_webapp">
-```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
 knitr::include_graphics("static/pictures/epilepsy-webapp.png")
 ```
 [**Epilepsy Detection AI Web App**](epilepsy_webapp.html) <br> I hosted an AI I created with friends that determines if someone is experiencing epilepsy based on EEG brain waves.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div id = "explorantine">
+```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px"'}
+knitr::include_graphics("static/pictures/explorantine-main-page.png")
+```
+[**Hackathon Winning Project - Explorantine**](explorantine.html) <br> Our Hackathon team created a web app to help local businesses bring in customers.
 </div>
 
 <div>
@@ -122,6 +135,17 @@ knitr::include_graphics("static/pictures/shanghai-property.png")
 knitr::include_graphics("static/pictures/takeactionmass.png")
 ```
 [**Social Justice Website**](social_justice.html) <br> With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.
+</div>
+
+<div>
+<hr>
+</div>
+
+<div id = "wangwang">
+```{r, echo=FALSE, out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px;"'}
+knitr::include_graphics("static/pictures/wangwang-main-page.png")
+```
+[**WeChat Miniprogram - WangWang**](wangwang.html) <br> With friends, we are creating a WeChat miniprogram accessible to all WeChat users that can match tennis players with others who play in the same area.
 </div>
 
 

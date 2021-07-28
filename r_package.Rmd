@@ -31,8 +31,12 @@ First, I was assigned to add some quality-of-life features for better user exper
 knitr::include_graphics("static/pictures/ppbds-3.png")
 ```
 
-My next step is to work on improving instructions of the package as well as understand the reason behind some of the common problems that arise while making tutorials.
+Afterwards, I worked on fixing a lot of the package's technical errors while adding more addins that check and format tutorials. Also, a recent feature I am working on is creating a report of submitted answers for users to look at after completing each tutorial.
 
+```{r, fig.cap = "Sample Report"}
+knitr::include_graphics("static/pictures/ppbds-report.png")
+```
 
+I plan on working on this package for the entirety of the summer, so I hope I can create more useful and interesting features in the next month!
 
 

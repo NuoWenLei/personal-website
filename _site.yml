@@ -15,6 +15,8 @@ navbar:
           href: covid_analysis.html
         - text: "Epilepsy AI Web App"
           href: epilepsy_webapp.html
+        - text: "Hackathon Project - Explorantine"
+          href: explorantine.html
         - text: "Investment Bot"
           href: investment_bot.html
         - text: "Mask AI Web App"
@@ -27,4 +29,6 @@ navbar:
           href: shanghai_property.html
         - text: "Social Justice Website"
           href: social_justice.html
+        - text: "WeChat Miniprogram - WangWang"
+          href: wangwang.html
 output: distill::distill_article
