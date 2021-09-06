@@ -20,11 +20,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r, echo=FALSE,out.width="30%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
 knitr::include_graphics("static/pictures/personal_photo.jpg")
 ```
-Hello, I'm Nuo Wen Lei from Shanghai, studying in the 2022 class of Concord Academy, MA. My personal interests mainly lies in the realm of understanding humanities and the world around me through the lens of data and logic.
+Hello, I'm Nuo Wen Lei from Shanghai, studying in the 2022 class of Concord Academy, MA. My personal interests mainly lie in the realm of understanding humanities and the world around me through the lens of data and logic.
 <br><br>
-I'm also a tennis and squash player as well as a japanese-cuisine appreciator with ramen and chicken wings being my favorite.
+I'm also a tennis and squash player as well as a Japanese-cuisine appreciator with ramen and chicken wings being my favorite.
 <br><br>
-This website is a gallery of the projects I've done over the past 3-4 years in highschool. It shows how my interests developed overtime from computer science to web design to data science and AI.
+This website is a gallery of the projects I've done over the past 3-4 years in high school. It shows how my interests developed over time from computer science to web design to data science and AI.
 <br><br>
 I hope you find something interesting or just enjoy your time on this website!
 </div>
