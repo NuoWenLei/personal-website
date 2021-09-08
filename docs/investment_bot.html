@@ -2030,7 +2030,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2120,8 +2120,7 @@ Figure 2: Visualization of investment pipeline
 </div>
 <p><strong>Data Webscrape</strong> - The pipeline starts by taking various numerical and textual data from multiple online sources.</p>
 <p><strong>Data Cleaning and Processing</strong> - The data is then cleaned for processing use since these online sources meant for the data to be presented to people and not machines. In this section, features like market cap values are also created based on their non-numeric displays on websites.</p>
-<p><strong>Investment Decision</strong> - Based on the data collected, each feature is assigned a weightage in the decision-making process, allowing each stock to be “scored”. Then the pipeline invests in the 5 highest-scoring stocks on an Investopedia simulator.</p>
-<p>The next step for this project is to integrate an ML or AI model into the pipeline, so that the pipeline can essentially learn and improve over time.</p>
+<p><strong>Investment Decision with ML</strong> - Using previously collected data, many different ML models are trained, each with a different model-scaler pairing. The pair with the highest evaluation score is selected to transform the new data. Based on the confidence level of the predictions, the pipeline invests in the top 5 stock symbols on an Investopedia simulator</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
