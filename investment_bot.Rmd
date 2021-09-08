@@ -26,9 +26,7 @@ knitr::include_graphics("static/pictures/investment-pipeline.png")
 
 **Data Cleaning and Processing** - The data is then cleaned for processing use since these online sources meant for the data to be presented to people and not machines. In this section, features like market cap values are also created based on their non-numeric displays on websites.
 
-**Investment Decision** - Based on the data collected, each feature is assigned a weightage in the decision-making process, allowing each stock to be "scored". Then the pipeline invests in the 5 highest-scoring stocks on an Investopedia simulator.
-
-The next step for this project is to integrate an ML or AI model into the pipeline, so that the pipeline can essentially learn and improve over time.
+**Investment Decision with ML** - Using previously collected data, many different ML models are trained, each with a different model-scaler pairing. The pair with the highest evaluation score is selected to transform the new data. Based on the confidence level of the predictions, the pipeline invests in the top 5 stock symbols on an Investopedia simulator
 
 
 
