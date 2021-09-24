@@ -20,7 +20,7 @@ I have an interest in Computer Science, Data Science, and Behavioral Sciences, a
 Projects I'm currently working on:
 
 - [WangWang](wangwang.html)
-- AIdvocacy - a nonprofit organization focused on providing free ML and AI education
+- [AIdvocacy](https://aidvocacy.com) - a nonprofit organization focused on providing free ML and AI education
 - PAC and Media Bias research papers
 
 Ways to reach me:
@@ -30,6 +30,11 @@ Ways to reach me:
 - Email: nuowen0612@gmail.com
 - Instagram: nuowenlei
 - Discord: NuoWenLei#0308
+
+Sports:
+
+- Varsity Tennis First Singles in CA. [Here's my tennis video](https://youtu.be/oCPy2Drd_oQ)
+- Varsity Squash Number 1 in CA.
 
 ## My Journey
 
