@@ -86,26 +86,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Nuo Wen Lei's Personal Website: Personal Projects</title>
+  <title>Nuo Wen Lei's Personal Website: Wordle and Quordle Solver</title>
 
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Nuo Wen Lei&#39;s Personal Website: Personal Projects"/>
+  <meta property="og:title" content="Nuo Wen Lei&#39;s Personal Website: Wordle and Quordle Solver"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Nuo Wen Lei&#39;s Personal Website"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Nuo Wen Lei&#39;s Personal Website: Personal Projects"/>
+  <meta property="twitter:title" content="Nuo Wen Lei&#39;s Personal Website: Wordle and Quordle Solver"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site"]}},"value":[{"type":"character","attributes":{},"value":["Personal Projects"]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Wordle and Quordle Solver"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2050,7 +2050,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Personal Projects","authors":[]}
+{"title":"Wordle and Quordle Solver","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2091,7 +2091,7 @@ Projects
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Personal Projects</h1>
+<h1>Wordle and Quordle Solver</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 
@@ -2099,125 +2099,63 @@ Projects
 
 
 <div class="d-article">
-<h2 id="about">About</h2>
-<div>
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/personal_photo.jpg" width="30%" height="20%" style="float:right; padding: 10px" /></p>
-</div>
-<p>Hello, I’m Nuo Wen Lei from Shanghai, studying in the 2022 class of Concord Academy, MA. My personal interests mainly lie in the realm of understanding humanities and the world around me through the lens of data and logic. <br><br> I’m also a tennis and squash player (<a href="https://youtu.be/oCPy2Drd_oQ">clip of me playing tennis</a>) as well as a Japanese-cuisine appreciator with ramen and chicken wings being my favorite. <br><br> This website is a gallery of the projects I’ve done over the past 3-4 years in high school. It shows how my interests developed over time from computer science to web design to data science and AI. <br><br> I hope you find something interesting or just enjoy your time on this website!</p>
-</div>
-<h2 id="table-of-contents">Table of Contents</h2>
+<p>Associated Links:</p>
 <ul>
-<li><a href="covid_analysis.html">COVID Death Trend Analysis and AI Prediction</a></li>
-<li><a href="epilepsy_webapp.html">Epilepsy Detection AI Web App</a></li>
-<li><a href="explorantine.html">Hackathon Winning Project - Explorantine</a></li>
-<li><a href="investment_bot.html">Investment Bot</a></li>
-<li><a href="mask_webapp.html">Mask Detection AI Web App</a></li>
-<li><a href="pac_analysis.html">PAC Donation Analysis Website</a></li>
-<li><a href="r_package.html">R Tutorial Package Contribution</a></li>
-<li><a href="shanghai_property.html">Shanghai Property Analysis Website</a></li>
-<li><a href="social_justice.html">Social Justice Website</a></li>
-<li><a href="wangwang.html">WeChat Miniprogram - WangWang</a></li>
-<li><a href="wordle.html">Wordle and Quordle Solver</a></li>
+<li><a href="https://github.com/NuoWenLei/Wordle_Solver">GitHub Repo</a></li>
+<li><a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a></li>
+<li><a href="https://www.devangthakkar.com/wordle_archive/">Wordle Archive</a></li>
+<li><a href="https://www.quordle.com/#/">Quordle</a></li>
 </ul>
-<h2 id="quick-overview">Quick Overview</h2>
-<h3 id="go-to-projects-tab-for-more-details-on-each-individual-project">Go to Projects tab for more details on each individual project</h3>
-<div id="covid_analysis">
+<p>This is a fun project I played around with over my senior year spring break. As the New York Times Wordle game took my school by storm, its simple format made me curious about the possibility of creating an algorithm to solve it. To start the project, I knew that I had to first create some interface for a machine to play Wordle, so, as pastime on a flight, I made a text version of Wordle. There is a small difference however. While the actual Wordle often displays words that are well-known to people, I made my World simply randomly choose a word out of all possible 5-letter words.</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/COVID-death-trend.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="static/pictures/text_wordle.png" alt="Text Version of Wordle" width="452" />
+<p class="caption">
+Figure 1: Text Version of Wordle
+</p>
 </div>
-<p><a href="covid_analysis.html"><strong>COVID Death Trend Analysis and AI Prediction</strong></a> <br> After an initial analysis of the COVID death trends and trial of basic AI methods, I dive deeper into finding other AI techniques to predict the death trends.</p>
 </div>
-<div>
-<hr>
-</div>
-<div id="epilepsy_webapp">
+<p>In the text version, capitalize means the letter is in the right place, “*” means the letter is present but in the wrong location, and lower case means the letter is not in the word. I also added a “possible letters” bar for ease of playing.</p>
+<p>After creating the Wordle game, I began to think about how I would approach creating a Wordle solver. Part of me wanted to create a Reinforcement Learning agent to play the game, but another part of me felt that I’ve been doing too much AI-related projects recently. I settled on creating a non-AI algorithm that would probabilistically choose the optimal words.</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/epilepsy-webapp.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="static/pictures/letter_location_1.png" alt="Exploration of letter-location probability at the first position of a word" width="189" />
+<p class="caption">
+Figure 2: Exploration of letter-location probability at the first position of a word
+</p>
 </div>
-<p><a href="epilepsy_webapp.html"><strong>Epilepsy Detection AI Web App</strong></a> <br> I hosted an AI I created with friends that determines if someone is experiencing epilepsy based on EEG brain waves.</p>
 </div>
-<div>
-<hr>
-</div>
-<div id="explorantine">
+<p>I first made an algorithm that assigned information “rewards” to getting a letter correct (3 points), present (2 points), or wrong (1 point), thereby generating an information reward value for each word in the vocabulary. It then simply chose the word with the highest information reward. This algorithm created a machine that prioritized letters with a high probability of being in that position above all else. And while it did work to an extent, it was more of a Wordle “attempter” than a Wordle “solver”.</p>
+<p>Now if I really wanted to spin this into a story about personal insights and biases, this would be the moral of the story. I assumed that a letter in the correct place would always provide more information than other results, and in doing so I created an algorithm whose goal deviated from the overarching goal.</p>
+<p>Therefore, to improve the machine, firstly I changed the information reward as dependent on what percentage of the vocabulary the action would eliminate. For example, if getting the word correct eliminates half the vocab, its reward for being correct was 1/2. Secondly, I added a bunch of conditionals to make sure that no information was wasted. I found that covering all the scenarios where a letter that’s present but in the wrong position was quite challenging. But one-by-one I found and covered all those edge cases. Finally, I set the machine to use the first 5 guesses to eliminate as much of the vocabulary as possible and then use the most possible word only for the final guess. This allowed the algorithm to truly “solve” Wordle.</p>
+<p>I then created a web interface for the machine to actually play the official Wordle. Using the Python module of Selenium, the Wordle solver (named Trish) could solve the Wordle live in front of your eyes!</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/explorantine-main-page.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="static/pictures/official_wordle_solve.png" alt="Trish solving Wordle for March 20, 2022" width="801" />
+<p class="caption">
+Figure 3: Trish solving Wordle for March 20, 2022
+</p>
 </div>
-<p><a href="explorantine.html"><strong>Hackathon Winning Project - Explorantine</strong></a> <br> Our Hackathon team created a web app to help local businesses bring in customers.</p>
 </div>
-<div>
-<hr>
-</div>
-<div id="investment_bot">
+<p>It can also solve any Wordle archived <a href="https://www.devangthakkar.com/wordle_archive/">here</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/investment-bot.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="static/pictures/archive_wordle_solve.png" alt="Trish solving Wordle for March 20, 2022" width="824" />
+<p class="caption">
+Figure 4: Trish solving Wordle for March 20, 2022
+</p>
 </div>
-<p><a href="investment_bot.html"><strong>Investment Bot</strong></a> <br> I created a pipeline that analyzes web data and invests on an Investopedia simulator.</p>
 </div>
-<div>
-<hr>
-</div>
-<div id="mask_webapp">
+<p>As a final challenge, I created a separate algorithm that solved <a href="https://www.quordle.com/#/">Quordle</a> instead of Wordle (named Trisha) by simply adding up the information reward value that could be gained from every board and left the last 4 guesses for optimal words. And, well, as of now (March 20, 2022), it hasn’t failed yet!</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/mask-webapp.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="static/pictures/quordle_solve.png" alt="Trisha solving Quordle for March 20, 2022" width="672" />
+<p class="caption">
+Figure 5: Trisha solving Quordle for March 20, 2022
+</p>
 </div>
-<p><a href="mask_webapp.html"><strong>Mask Detection AI Web App</strong></a> <br> I created and hosted an AI on the internet that detects if people are wearing masks in an image.</p>
 </div>
-<div>
-<hr>
-</div>
-<div id="pac_analysis">
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/pac-web.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
-</div>
-<p><a href="pac_analysis.html"><strong>PAC Donation Analysis Website</strong></a> <br> I analyzed and visualized the relationship between foreign-connected company donations with US Congress representation.</p>
-</div>
-<div>
-<hr>
-</div>
-<div id="r_package">
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/ppbds-package.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
-</div>
-<p><a href="r_package.html"><strong>R Tutorial Package Contribution</strong></a> <br> Over the summer of 2021, I work with a professor to help improve an R tutorial package.</p>
-</div>
-<div>
-<hr>
-</div>
-<div id="shanghai_property">
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/shanghai-property.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
-</div>
-<p><a href="shanghai_property.html"><strong>Shanghai Property Analysis Website</strong></a> <br> I created a website that visualizes the relationship between properties and position in Shanghai.</p>
-</div>
-<div>
-<hr>
-</div>
-<div id="social_justice">
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/takeactionmass.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
-</div>
-<p><a href="social_justice.html"><strong>Social Justice Website</strong></a> <br> With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.</p>
-</div>
-<div>
-<hr>
-</div>
-<div id="wangwang">
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/wangwang-main-page.png" width="49%" height="20%" style="float:right; padding: 10px;" /></p>
-</div>
-<p><a href="wangwang.html"><strong>WeChat Miniprogram - WangWang</strong></a> <br> With friends, we are creating a WeChat miniprogram accessible to all WeChat users that can match tennis players with others who play in the same area.</p>
-</div>
-<div>
-<hr>
-</div>
-<div id="wordle">
-<div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/official_wordle_solve.png" width="49%" height="20%" style="float:left; padding: 10px;" /></p>
-</div>
-<p><a href="wordle.html"><strong>Wordle and Quordle Solver</strong></a> <br> As a fun spring break project, I created an algorithm that can live solve Wordle and Quordle with probability.</p>
-</div>
+<p>This just started off as a fun project for over spring break. However, it not only helped me brush up on actual hand-coding, but it also taught me some good lessons about probabilities and my own assumptions!</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
