@@ -31,4 +31,6 @@ navbar:
           href: social_justice.html
         - text: "WeChat Miniprogram - WangWang"
           href: wangwang.html
+        - text: "Wordle and Quordle Solver"
+          href: wordle.html
 output: distill::distill_article
