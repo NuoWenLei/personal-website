@@ -159,7 +159,7 @@ knitr::include_graphics("static/pictures/wangwang-main-page.png")
 ```{r, echo=FALSE, out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px;"'}
 knitr::include_graphics("static/pictures/official_wordle_solve.png")
 ```
-[**Wordle and Quordle Solver**](wordle.html) <br> As a fun spring break project, I created an algorithm that can live solve Wordle and Quordle with probability.
+[**Wordle and Quordle AND OCTORDLE Solver**](wordle.html) <br> As a fun spring break project, I created an algorithm that can live solve Wordle, Quordle, and Octordle with probability.
 </div>
 
 

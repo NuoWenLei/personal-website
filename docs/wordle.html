@@ -86,26 +86,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Nuo Wen Lei's Personal Website: Wordle and Quordle Solver</title>
+  <title>Nuo Wen Lei's Personal Website: Wordle and Quordle AND OCTORDLE Solver</title>
 
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Nuo Wen Lei&#39;s Personal Website: Wordle and Quordle Solver"/>
+  <meta property="og:title" content="Nuo Wen Lei&#39;s Personal Website: Wordle and Quordle AND OCTORDLE Solver"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Nuo Wen Lei&#39;s Personal Website"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Nuo Wen Lei&#39;s Personal Website: Wordle and Quordle Solver"/>
+  <meta property="twitter:title" content="Nuo Wen Lei&#39;s Personal Website: Wordle and Quordle AND OCTORDLE Solver"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Wordle and Quordle Solver"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Wordle and Quordle AND OCTORDLE Solver"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2050,7 +2050,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Wordle and Quordle Solver","authors":[]}
+{"title":"Wordle and Quordle AND OCTORDLE Solver","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2080,7 +2080,7 @@ Projects
 <a href="shanghai_property.html">Shanghai Property Analysis</a>
 <a href="social_justice.html">Social Justice Website</a>
 <a href="wangwang.html">WeChat Miniprogram - WangWang</a>
-<a href="wordle.html">Wordle and Quordle Solver</a>
+<a href="wordle.html">Wordle and Quordle AND OCTORDLE Solver</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2092,7 +2092,7 @@ Projects
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Wordle and Quordle Solver</h1>
+<h1>Wordle and Quordle AND OCTORDLE Solver</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 
@@ -2154,6 +2154,15 @@ Figure 4: Trish solving Wordle for March 20, 2022
 <img src="static/pictures/quordle_solve.png" alt="Trisha solving Quordle for March 20, 2022" width="672" />
 <p class="caption">
 Figure 5: Trisha solving Quordle for March 20, 2022
+</p>
+</div>
+</div>
+<p>Did I say final challenge? I lied. A good friend told me that an Octordle exists, so I had to try it out. The previous algorithm actually FAILED on its first attempt to solve the daily, and I realized it was because the model didn’t prioritize game boards with more vocabulary to filter. Therefore, I added a scaling component that multiplies with the information reward based on the number of vocabulary for each game board. This changes the reward gotten from each game board, allowing the solver (now named Patricia) to have a sense of priority or urgency.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="static/pictures/octordle_solve.png" alt="Patricia solving Octordle for March 20, 2022" width="675" />
+<p class="caption">
+Figure 6: Patricia solving Octordle for March 20, 2022
 </p>
 </div>
 </div>

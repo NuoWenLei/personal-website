@@ -1,5 +1,5 @@
 ---
-title: "Wordle and Quordle Solver"
+title: "Wordle and Quordle AND OCTORDLE Solver"
 output: distill::distill_article
 ---
 
@@ -55,5 +55,13 @@ As a final challenge, I created a separate algorithm that solved [Quordle](https
 knitr::include_graphics("static/pictures/quordle_solve.png")
 ```
 
+Did I say final challenge? I lied. A good friend told me that an Octordle exists, so I had to try it out. The previous algorithm actually FAILED on its first attempt to solve the daily, and I realized it was because the model didn't prioritize game boards with more vocabulary to filter. Therefore, I added a scaling component that multiplies with the information reward based on the number of vocabulary for each game board. This changes the reward gotten from each game board, allowing the solver (now named Patricia) to have a sense of priority or urgency.
+
+```{r, fig.cap = "Patricia solving Octordle for March 20, 2022"}
+knitr::include_graphics("static/pictures/octordle_solve.png")
+```
+
 This just started off as a fun project for over spring break. However, it not only helped me brush up on actual hand-coding, but it also taught me some good lessons about probabilities and my own assumptions!
+
+
 
