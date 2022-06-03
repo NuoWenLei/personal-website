@@ -88,26 +88,26 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Nuo Wen Lei's Personal Website: Epilepsy Detection AI Web App</title>
+  <title>Nuo Wen Lei's Personal Website: Senior Project - Neural Network Interpreter</title>
 
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Nuo Wen Lei&#39;s Personal Website: Epilepsy Detection AI Web App"/>
+  <meta property="og:title" content="Nuo Wen Lei&#39;s Personal Website: Senior Project - Neural Network Interpreter"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Nuo Wen Lei&#39;s Personal Website"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Nuo Wen Lei&#39;s Personal Website: Epilepsy Detection AI Web App"/>
+  <meta property="twitter:title" content="Nuo Wen Lei&#39;s Personal Website: Senior Project - Neural Network Interpreter"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Epilepsy Detection AI Web App"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Senior Project - Neural Network Interpreter"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2084,7 +2084,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Epilepsy Detection AI Web App","authors":[]}
+{"title":"Senior Project - Neural Network Interpreter","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2127,7 +2127,7 @@ Projects
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Epilepsy Detection AI Web App</h1>
+<h1>Senior Project - Neural Network Interpreter</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 
@@ -2137,33 +2137,172 @@ Projects
 <div class="d-article">
 <p>Associated Links:</p>
 <ul>
-<li><a href="https://epilepsy-detection.herokuapp.com/">Epilepsy
-Detection Web App</a></li>
-<li><a href="https://www.inspiritai.com/">Inspirit AI Main Page</a></li>
+<li><a href="https://github.com/NuoWenLei/senior_project_stuff">GitHub
+Repo</a></li>
+<li><a
+href="https://docs.google.com/presentation/d/1HTauzC1eWBQXbKCHm5CnlEnE7BqevxECg2qkCQ1kEVA/edit?usp=sharing">School
+Presentation</a></li>
+<li><a href="https://openreview.net/pdf?id=rJY0-Kcll">OPTIMIZATION AS A
+MODEL FOR FEW-SHOT LEARNING</a></li>
+<li><a href="https://arxiv.org/pdf/1706.03762.pdf">ATTENTION IS ALL YOU
+NEED</a></li>
 </ul>
-<p>With friends from an online AI course, <a
-href="https://www.inspiritai.com/">Inspirit AI</a>, we trained an AI to
-detect if a patient is experiencing epilepsy based on their EEG brain
-wave graph.</p>
+<p>This is the senior project that I dedicated most of my spring
+semester to. The focus is on creating a proof-of-concept AI model that
+can interpret another AI model. Using word embeddings to understand
+features and weights and biases between layers to understand
+relationships between data points and neurons, I wanted to make an AI
+model that can “translate” the AI neuron weights to english, cracking
+open the neural network blackbox.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
-<img src="static/pictures/epilepsy-graph.png" alt="Output of AI shows its confidence in its decision while processing the graph" width="572" />
+<img src="static/pictures/senior_project_pipeline.png" alt="Interpreter Pipeline Structure" width="677" />
 <p class="caption">
-Figure 1: Output of AI shows its confidence in its decision
-while processing the graph
+Figure 1: Interpreter Pipeline Structure
 </p>
 </div>
 </div>
-<p>We were able to reach an accuracy of <strong>89%</strong>, which is
-definitely not accurate enough to be used professionally. However,
-throughout the project we learned a lot about the ethical concerns
-surrounding AI’s influence on major fields as well as problems with
-modern-day AI’s explain-ability that discourage people to trust its
-results.</p>
-<p>If you are interested, please do <a
-href="https://epilepsy-detection.herokuapp.com/"><strong>click
-here</strong></a> to try it out for yourself. Note that it does take a
-while to load because the AI model size is big.</p>
+<p>The way I landed on this particular idea was kind of through a
+mishmash of what I wanted to try and what problem I wanted to solve
+(mostly just what I wanted to try). I have always wanted to try making
+models that processed and produced the weirdest inputs and outputs. It
+just seems like when building models that processed images or sequences,
+I just slap on some CNNs or LSTMs and then call it a day, rarely
+contributing anything of my own. Therefore, building this interpreter
+model is in a way like a challenge for myself. However, that is not to
+say there is no application for a model like this.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="static/pictures/interpretability_comparison.png" alt="Difference in model interpretability between Logistic Regression (ML) and Neural Network (DL)" width="988" />
+<p class="caption">
+Figure 2: Difference in model interpretability between
+Logistic Regression (ML) and Neural Network (DL)
+</p>
+</div>
+</div>
+<p>The image above compares the difference in model complexity and
+therefore interpretability between a logistic regression model and a
+neural network model. You can see that for logistic regression or any
+kind of direct regression model for that matter, each input feature is
+assign a single weightage, representing how that feature contributes to
+the output.</p>
+<p>However look to the right and you’ll see that it’s not as
+straightforward for the neural network. If every line (edge) represents
+a weightage, you’ll see that the neural network has quite a few more
+weightages than the logistic regression model. This is largely due to
+the hidden layers between the inputs and output. These hidden layers
+contain their own neurons whose meanings are defined and refined by the
+model. Therefore, encoded as numbers that only the model that created it
+can understand, neural networks become like blackboxes, incomprehensible
+to humans.</p>
+<p>This interpretability issue actually does impact company decisions to
+utilize and “trust” these machines because often times, especially in
+recent years, the question of equity has been raised to many big data
+models. Companies need to make sure that their models do not treat
+demographics unequitably, and so clarity within the model is very
+important. The neural network’s lack in that area thus often push big
+data companies away from using deep learning solutions and resorting to
+more basic machine learning solutions that produce decent results with
+clarity of feature importance.</p>
+<p>This is the problem I wanted to solve with this model, some kind of
+mediator that can tell humans what the models are thinking.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<img src="static/pictures/word_embedding.png" alt="Word Embedding Visualization" width="1046" />
+<p class="caption">
+Figure 3: Word Embedding Visualization
+</p>
+</div>
+</div>
+<p>So to make my model understand words, I encoded all the feature names
+into word embeddings, which are vector points that represent word
+relationships within a 300-dimensional vector space. To let my model
+understand word embeddings, I utilized the Multi Head Attention layer
+proposed in the paper, <a
+href="https://arxiv.org/pdf/1706.03762.pdf">ATTENTION IS ALL YOU
+NEED</a> and performed self attention with the layer. This allows the
+model to mix and understand how every dimension of the word embedding
+vectors relate to each other, thereby letting the model gain an even
+more comprehensible understanding of the features.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="static/pictures/multi_head_attention.png" alt="Multi Head Attention layer structure" width="505" />
+<p class="caption">
+Figure 4: Multi Head Attention layer structure
+</p>
+</div>
+</div>
+<p>By combining the understanding of words and linear weights, I created
+2 model types based on the mutability of input order. When thinking
+about how to input the data, I realized that the model shouldn’t need to
+have an immutable input order, as in an arbitrary feature “x” shouldn’t
+always have to be in the same position of the batch. Therefore I first
+created a model structure that didn’t need a determined input order by
+treating one data sample with all the different features and weights as
+a batch with each sample being the corresponding feature and weight.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="static/pictures/dynamic_model.png" alt="Interpreter with dynamic input order" width="373" />
+<p class="caption">
+Figure 5: Interpreter with dynamic input order
+</p>
+</div>
+</div>
+<p>Then, to see if an interpreter that assumes static input order yields
+any benefits, I created a static version too. This static version also
+takes into account a covariance matrix between features and feature
+weights since it can assume static input order. The point of the matrix
+is that it should allow the interpreter to get a ballpark of where the
+output feature should be in word embedding vector space.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="static/pictures/static_model.png" alt="Interpreter with static input order" width="423" />
+<p class="caption">
+Figure 6: Interpreter with static input order
+</p>
+</div>
+</div>
+<p>In terms of results, the static interpreter succeeded in training,
+continuing to improve even after some 250 steps while the dynamic
+interpreter seems to have plateaued just after some 50 steps of
+training.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="static/pictures/senior_project_train_results.png" alt="Training results of the two interpreters" width="756" />
+<p class="caption">
+Figure 7: Training results of the two interpreters
+</p>
+</div>
+</div>
+<p>However, after actually putting the interpreters into a testing
+environment, the results qualitatively changed drastically.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="static/pictures/senior_project_pred_results.png" alt="Prediction results of the two interpreters" width="927" />
+<p class="caption">
+Figure 8: Prediction results of the two interpreters
+</p>
+</div>
+</div>
+<p>Both were given a base model that uses many attributes of a wine to
+predict the residual sugar in the wine. While the static interpreter
+repeatedly predicted words that had little to no relation with “residual
+sugar”, the dynamic interpreter has predicted words that are similar to,
+if not exactly, “residual sugar”. I think the difference in training and
+prediction environment results is a testament to how overfitting can be
+such a misleading problem.</p>
+<p>Anyways, to conclude, this was a super fun project, guiding myself
+through everything. I feel like that proof-of-concept stage has been
+reached through this project. And while there are many ways to further
+this project, I don’t think I am skilled enough to pursue many of those
+options. So I’ll put the further exploration of this project on hold and
+see if I can tackle it any better when I return to it.</p>
+<p>If you want to see my presentation for this project, you can <a
+href="https://docs.google.com/presentation/d/1HTauzC1eWBQXbKCHm5CnlEnE7BqevxECg2qkCQ1kEVA/edit?usp=sharing">click
+here</a>.</p>
+<p>And here is the <a
+href="https://github.com/NuoWenLei/senior_project_stuff">GitHub repo</a>
+with code for the project.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,17 +74,18 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
 code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
+
 
   <!--radix_placeholder_meta_tags-->
   <title>Nuo Wen Lei's Personal Website: Wordle and Quordle AND OCTORDLE Solver</title>
@@ -452,7 +454,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   </style>
 
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
@@ -1024,10 +1026,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     position: relative;
     margin-bottom: 2.5em;
     margin-top: 1.5em;
-  }
-
-  .figure img {
-    width: 100%;
   }
 
   .figure .caption {
@@ -1859,7 +1857,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -1870,6 +1877,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1969,6 +2001,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1991,7 +2025,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2030,7 +2064,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2077,6 +2111,7 @@ Projects
 <a href="mask_webapp.html">Mask AI Web App</a>
 <a href="pac_analysis.html">PAC Analysis</a>
 <a href="r_package.html">R Data Science Tutorials</a>
+<a href="senior_project.html">Senior Project - Model Interpreter</a>
 <a href="shanghai_property.html">Shanghai Property Analysis</a>
 <a href="social_justice.html">Social Justice Website</a>
 <a href="wangwang.html">WeChat Miniprogram - WangWang</a>
@@ -2102,72 +2137,135 @@ Projects
 <div class="d-article">
 <p>Associated Links:</p>
 <ul>
-<li><a href="https://github.com/NuoWenLei/Wordle_Solver">GitHub Repo</a></li>
-<li><a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a></li>
-<li><a href="https://www.devangthakkar.com/wordle_archive/">Wordle Archive</a></li>
+<li><a href="https://github.com/NuoWenLei/Wordle_Solver">GitHub
+Repo</a></li>
+<li><a
+href="https://www.nytimes.com/games/wordle/index.html">Wordle</a></li>
+<li><a href="https://www.devangthakkar.com/wordle_archive/">Wordle
+Archive</a></li>
 <li><a href="https://www.quordle.com/#/">Quordle</a></li>
 </ul>
-<p>This is a fun project I played around with over my senior year spring break. As the New York Times Wordle game took my school by storm, its simple format made me curious about the possibility of creating an algorithm to solve it. To start the project, I knew that I had to first create some interface for a machine to play Wordle, so, as pastime on a flight, I made a text version of Wordle. There is a small difference however. While the actual Wordle often displays words that are well-known to people, I made my Wordle simply randomly choose a word out of all possible 5-letter words.</p>
+<p>This is a fun project I played around with over my senior year spring
+break. As the New York Times Wordle game took my school by storm, its
+simple format made me curious about the possibility of creating an
+algorithm to solve it. To start the project, I knew that I had to first
+create some interface for a machine to play Wordle, so, as pastime on a
+flight, I made a text version of Wordle. There is a small difference
+however. While the actual Wordle often displays words that are
+well-known to people, I made my Wordle simply randomly choose a word out
+of all possible 5-letter words.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="static/pictures/text_wordle.png" alt="Text Version of Wordle" width="452" />
 <p class="caption">
 Figure 1: Text Version of Wordle
 </p>
 </div>
 </div>
-<p>In the text version, capitalize means the letter is in the right place, “*” means the letter is present but in the wrong location, and lower case means the letter is not in the word. I also added a “Possible Letters” bar for ease of playing.</p>
-<p>After creating the Wordle game, I began to think about how I would approach creating a Wordle solver. Part of me wanted to create a Reinforcement Learning agent to play the game, but another part of me felt that I’ve been doing too much AI-related projects recently. I settled on creating a non-AI algorithm that would probabilistically choose the optimal words.</p>
+<p>In the text version, capitalize means the letter is in the right
+place, “*” means the letter is present but in the wrong location, and
+lower case means the letter is not in the word. I also added a “Possible
+Letters” bar for ease of playing.</p>
+<p>After creating the Wordle game, I began to think about how I would
+approach creating a Wordle solver. Part of me wanted to create a
+Reinforcement Learning agent to play the game, but another part of me
+felt that I’ve been doing too much AI-related projects recently. I
+settled on creating a non-AI algorithm that would probabilistically
+choose the optimal words.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="static/pictures/letter_location_1.png" alt="Exploration of letter-location probability at the first position of a word" width="189" />
 <p class="caption">
-Figure 2: Exploration of letter-location probability at the first position of a word
+Figure 2: Exploration of letter-location probability at the
+first position of a word
 </p>
 </div>
 </div>
-<p>I first made an algorithm that assigned information “rewards” to getting a letter correct (3 points), present (2 points), or wrong (1 point), thereby generating an information reward value for each word in the vocabulary. It then simply chose the word with the highest information reward. This algorithm created a machine that prioritized letters with a high probability of being in that position above all else. And while it did work to an extent, it was more of a Wordle “attempter” than a Wordle “solver”.</p>
-<p>Now if I really wanted to spin this into a story about personal insights and biases, this would be the moral of the story. I assumed that a letter in the correct place would always provide more information than other results, and in doing so I created an algorithm whose goal deviated from the overarching goal.</p>
-<p>Therefore, to improve the machine, firstly I changed the information reward as dependent on what percentage of the vocabulary the action would eliminate. For example, if getting the word correct eliminates half the vocab, its reward for being correct was 1/2. This is somewhat of a greedy solution because by evaluating the effect of each letter individually, I ignore the percentage of vocabulary that would be eliminated by the outcomes of 2 or more letters in the word. This overlap-elimination effect, however, is minimal, so I chose to ignore the flaw.</p>
-<p>Secondly, I added a bunch of conditionals to make sure that no information was wasted. I found that covering all the scenarios where a letter that’s present but in the wrong position was quite challenging. But one-by-one I found and covered all those edge cases. Finally, I set the machine to use the first 5 guesses to eliminate as much of the vocabulary as possible and then use the most possible word only for the final guess. This allowed the algorithm to truly “solve” Wordle.</p>
-<p>I then created a web interface for the machine to actually play the official Wordle. Using the Python module of Selenium, the Wordle solver (named Trish) could solve the Wordle live in front of your eyes!</p>
+<p>I first made an algorithm that assigned information “rewards” to
+getting a letter correct (3 points), present (2 points), or wrong (1
+point), thereby generating an information reward value for each word in
+the vocabulary. It then simply chose the word with the highest
+information reward. This algorithm created a machine that prioritized
+letters with a high probability of being in that position above all
+else. And while it did work to an extent, it was more of a Wordle
+“attempter” than a Wordle “solver”.</p>
+<p>Now if I really wanted to spin this into a story about personal
+insights and biases, this would be the moral of the story. I assumed
+that a letter in the correct place would always provide more information
+than other results, and in doing so I created an algorithm whose goal
+deviated from the overarching goal.</p>
+<p>Therefore, to improve the machine, firstly I changed the information
+reward as dependent on what percentage of the vocabulary the action
+would eliminate. For example, if getting the word correct eliminates
+half the vocab, its reward for being correct was 1/2. This is somewhat
+of a greedy solution because by evaluating the effect of each letter
+individually, I ignore the percentage of vocabulary that would be
+eliminated by the outcomes of 2 or more letters in the word. This
+overlap-elimination effect, however, is minimal, so I chose to ignore
+the flaw.</p>
+<p>Secondly, I added a bunch of conditionals to make sure that no
+information was wasted. I found that covering all the scenarios where a
+letter that’s present but in the wrong position was quite challenging.
+But one-by-one I found and covered all those edge cases. Finally, I set
+the machine to use the first 5 guesses to eliminate as much of the
+vocabulary as possible and then use the most possible word only for the
+final guess. This allowed the algorithm to truly “solve” Wordle.</p>
+<p>I then created a web interface for the machine to actually play the
+official Wordle. Using the Python module of Selenium, the Wordle solver
+(named Trish) could solve the Wordle live in front of your eyes!</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="static/pictures/official_wordle_solve.png" alt="Trish solving Wordle for March 20, 2022" width="801" />
 <p class="caption">
 Figure 3: Trish solving Wordle for March 20, 2022
 </p>
 </div>
 </div>
-<p>It can also solve any Wordle archived <a href="https://www.devangthakkar.com/wordle_archive/">here</a>.</p>
+<p>It can also solve any Wordle archived <a
+href="https://www.devangthakkar.com/wordle_archive/">here</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
 <img src="static/pictures/archive_wordle_solve.png" alt="Trish solving Wordle for March 20, 2022" width="824" />
 <p class="caption">
 Figure 4: Trish solving Wordle for March 20, 2022
 </p>
 </div>
 </div>
-<p>As a final challenge, I created a separate algorithm that solved <a href="https://www.quordle.com/#/">Quordle</a> instead of Wordle (named Trisha) by simply adding up the information reward value that could be gained from every board and left the last 4 guesses for optimal words. And, well, as of now (March 20, 2022), it hasn’t failed yet!</p>
+<p>As a final challenge, I created a separate algorithm that solved <a
+href="https://www.quordle.com/#/">Quordle</a> instead of Wordle (named
+Trisha) by simply adding up the information reward value that could be
+gained from every board and left the last 4 guesses for optimal words.
+And, well, as of now (March 20, 2022), it hasn’t failed yet!</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
 <img src="static/pictures/quordle_solve.png" alt="Trisha solving Quordle for March 20, 2022" width="672" />
 <p class="caption">
 Figure 5: Trisha solving Quordle for March 20, 2022
 </p>
 </div>
 </div>
-<p>Did I say final challenge? I lied. A good friend told me that an Octordle exists, so I had to try it out. The previous algorithm actually FAILED on its first attempt to solve the daily, and I realized it was because the model didn’t prioritize game boards with more vocabulary to filter. Therefore, I added a scaling component that multiplies with the information reward based on the number of vocabulary for each game board. This changes the reward gotten from each game board, allowing the solver (now named Patricia) to have a sense of priority or urgency.</p>
+<p>Did I say final challenge? I lied. A good friend told me that an
+Octordle exists, so I had to try it out. The previous algorithm actually
+FAILED on its first attempt to solve the daily, and I realized it was
+because the model didn’t prioritize game boards with more vocabulary to
+filter. Therefore, I added a scaling component that multiplies with the
+information reward based on the number of vocabulary for each game
+board. This changes the reward gotten from each game board, allowing the
+solver (now named Patricia) to have a sense of priority or urgency.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
 <img src="static/pictures/octordle_solve.png" alt="Patricia solving Octordle for March 20, 2022" width="675" />
 <p class="caption">
 Figure 6: Patricia solving Octordle for March 20, 2022
 </p>
 </div>
 </div>
-<p>This just started off as a fun project for over spring break. However, it not only helped me brush up on actual hand-coding, but it also taught me some good lessons about probabilities and my own assumptions!</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>This just started off as a fun project for over spring break.
+However, it not only helped me brush up on actual hand-coding, but it
+also taught me some good lessons about probabilities and my own
+assumptions!</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

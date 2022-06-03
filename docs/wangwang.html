@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,17 +74,18 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
 code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
+
 
   <!--radix_placeholder_meta_tags-->
   <title>Nuo Wen Lei's Personal Website: WeChat Miniprogram - WangWang</title>
@@ -452,7 +454,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   </style>
 
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
@@ -1024,10 +1026,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     position: relative;
     margin-bottom: 2.5em;
     margin-top: 1.5em;
-  }
-
-  .figure img {
-    width: 100%;
   }
 
   .figure .caption {
@@ -1859,7 +1857,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -1870,6 +1877,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1969,6 +2001,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1991,7 +2025,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2030,7 +2064,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2077,6 +2111,7 @@ Projects
 <a href="mask_webapp.html">Mask AI Web App</a>
 <a href="pac_analysis.html">PAC Analysis</a>
 <a href="r_package.html">R Data Science Tutorials</a>
+<a href="senior_project.html">Senior Project - Model Interpreter</a>
 <a href="shanghai_property.html">Shanghai Property Analysis</a>
 <a href="social_justice.html">Social Justice Website</a>
 <a href="wangwang.html">WeChat Miniprogram - WangWang</a>
@@ -2100,45 +2135,63 @@ Projects
 
 
 <div class="d-article">
-<p>A good friend and I started this project because we were both tennis players who had a hard time finding new players to play with near us. Therefore, we decided to make a WeChat miniprogram that does exactly that. We decided to create it as a WeChat miniprogram to reach a large audience because WeChat is the main way of communication in China.</p>
+<p>A good friend and I started this project because we were both tennis
+players who had a hard time finding new players to play with near us.
+Therefore, we decided to make a WeChat miniprogram that does exactly
+that. We decided to create it as a WeChat miniprogram to reach a large
+audience because WeChat is the main way of communication in China.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="static/pictures/wangwang-main-page.png" alt="Main Page of WangWang" width="699" />
 <p class="caption">
 Figure 1: Main Page of WangWang
 </p>
 </div>
 </div>
-<p>I handled the javascript backend programming to connect with the cloud database and my friend did all the styling and position for the frontend. As we continued the project, another friend joined us and designed the layouts for all the pages. We are still currently working on a development version, so unfortunately it is not usable yet, but we have created several features already.</p>
+<p>I handled the javascript backend programming to connect with the
+cloud database and my friend did all the styling and position for the
+frontend. As we continued the project, another friend joined us and
+designed the layouts for all the pages. We are still currently working
+on a development version, so unfortunately it is not usable yet, but we
+have created several features already.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="static/pictures/wangwang-court-search.png" alt="Court Search Page of WangWang" width="700" />
 <p class="caption">
 Figure 2: Court Search Page of WangWang
 </p>
 </div>
 </div>
-<p>The main feature is searching for courts near you, which gives you information about the court location and rating as well as how many people play there.</p>
+<p>The main feature is searching for courts near you, which gives you
+information about the court location and rating as well as how many
+people play there.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="static/pictures/wangwang-profile.png" alt="Profile Page of WangWang" width="701" />
 <p class="caption">
 Figure 3: Profile Page of WangWang
 </p>
 </div>
 </div>
-<p>Another feature we added is a personal profile page, which allows you to fill in your basic information for matching optimal tennis partners.</p>
+<p>Another feature we added is a personal profile page, which allows you
+to fill in your basic information for matching optimal tennis
+partners.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
 <img src="static/pictures/wangwang-calendar.png" alt="Calendar Page of WangWang" width="698" />
 <p class="caption">
 Figure 4: Calendar Page of WangWang
 </p>
 </div>
 </div>
-<p>A feature we are still working on is a calendar function, which will allow users to better schedule meetings as well as further filter players based on parameters like available time.</p>
-<p>Though this project is still a work-in-progress, I have high hopes for this miniprogram and I wish that in the near future I can also personally use it!</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>A feature we are still working on is a calendar function, which will
+allow users to better schedule meetings as well as further filter
+players based on parameters like available time.</p>
+<p>Though this project is still a work-in-progress, I have high hopes
+for this miniprogram and I wish that in the near future I can also
+personally use it!</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

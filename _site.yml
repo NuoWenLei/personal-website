@@ -25,6 +25,8 @@ navbar:
           href: pac_analysis.html
         - text: "R Data Science Tutorials"
           href: r_package.html
+        - text: "Senior Project - Model Interpreter"
+          href: senior_project.html
         - text: "Shanghai Property Analysis"
           href: shanghai_property.html
         - text: "Social Justice Website"

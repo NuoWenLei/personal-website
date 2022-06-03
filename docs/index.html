@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { color: #20794d; } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,11 +74,11 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
-code span.sc { color: #20794d; } /* SpecialChar */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
 code span.st { color: #20794d; } /* String */
 code span.va { color: #111111; } /* Variable */
@@ -85,27 +86,28 @@ code span.vs { color: #20794d; } /* VerbatimString */
 code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
+
   <!--radix_placeholder_meta_tags-->
-  <title>Nuo Wen Lei's Personal Website: Personal Projects</title>
+  <title>Nuo Wen Lei's Personal Website: Personal Projects in High School</title>
 
 
 
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Nuo Wen Lei&#39;s Personal Website: Personal Projects"/>
+  <meta property="og:title" content="Nuo Wen Lei&#39;s Personal Website: Personal Projects in High School"/>
   <meta property="og:type" content="article"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Nuo Wen Lei&#39;s Personal Website"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Nuo Wen Lei&#39;s Personal Website: Personal Projects"/>
+  <meta property="twitter:title" content="Nuo Wen Lei&#39;s Personal Website: Personal Projects in High School"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site"]}},"value":[{"type":"character","attributes":{},"value":["Personal Projects"]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site"]}},"value":[{"type":"character","attributes":{},"value":["Personal Projects in High School"]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -452,7 +454,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   </style>
 
-  <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
   <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
@@ -1024,10 +1026,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     position: relative;
     margin-bottom: 2.5em;
     margin-top: 1.5em;
-  }
-
-  .figure img {
-    width: 100%;
   }
 
   .figure .caption {
@@ -1859,7 +1857,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          return "<p>" + $('#ref-' + ref).html() + "</p>";
+        }).join("\n");
         window.tippy(this, {
           allowHTML: true,
           content: refHtml,
@@ -1870,6 +1877,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1969,6 +2001,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1991,7 +2025,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2030,7 +2064,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2050,7 +2084,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Personal Projects","authors":[]}
+{"title":"Personal Projects in High School","authors":[]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2077,6 +2111,7 @@ Projects
 <a href="mask_webapp.html">Mask AI Web App</a>
 <a href="pac_analysis.html">PAC Analysis</a>
 <a href="r_package.html">R Data Science Tutorials</a>
+<a href="senior_project.html">Senior Project - Model Interpreter</a>
 <a href="shanghai_property.html">Shanghai Property Analysis</a>
 <a href="social_justice.html">Social Justice Website</a>
 <a href="wangwang.html">WeChat Miniprogram - WangWang</a>
@@ -2092,7 +2127,7 @@ Projects
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Personal Projects</h1>
+<h1>Personal Projects in High School</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
 
@@ -2105,29 +2140,50 @@ Projects
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/personal_photo.jpg" width="30%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p>Hello, I’m Nuo Wen Lei from Shanghai, studying in the 2022 class of Concord Academy, MA. My personal interests mainly lie in the realm of understanding humanities and the world around me through the lens of data and logic. <br><br> I’m also a tennis and squash player (<a href="https://youtu.be/oCPy2Drd_oQ">clip of me playing tennis</a>) as well as a Japanese-cuisine appreciator with ramen and chicken wings being my favorite. <br><br> This website is a gallery of the projects I’ve done over the past 3-4 years in high school. It shows how my interests developed over time from computer science to web design to data science and AI. <br><br> I hope you find something interesting or just enjoy your time on this website!</p>
+<p>Hello, I’m Nuo Wen Lei from Shanghai, studying in the 2022 class of
+Concord Academy, MA. My personal interests mainly lie in the realm of
+understanding humanities and the world around me through the lens of
+data and logic. <br><br> I’m also a tennis and squash player (<a
+href="https://youtu.be/oCPy2Drd_oQ">clip of me playing tennis</a>) as
+well as a Japanese-cuisine appreciator with ramen and chicken wings
+being my favorite. <br><br> This website is a gallery of the projects
+I’ve done over the past 3-4 years in high school. It shows how my
+interests developed over time from computer science to web design to
+data science and AI. <br><br> I hope you find something interesting or
+just enjoy your time on this website!</p>
 </div>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
-<li><a href="covid_analysis.html">COVID Death Trend Analysis and AI Prediction</a></li>
-<li><a href="epilepsy_webapp.html">Epilepsy Detection AI Web App</a></li>
-<li><a href="explorantine.html">Hackathon Winning Project - Explorantine</a></li>
+<li><a href="covid_analysis.html">COVID Death Trend Analysis and AI
+Prediction</a></li>
+<li><a href="epilepsy_webapp.html">Epilepsy Detection AI Web
+App</a></li>
+<li><a href="explorantine.html">Hackathon Winning Project -
+Explorantine</a></li>
 <li><a href="investment_bot.html">Investment Bot</a></li>
 <li><a href="mask_webapp.html">Mask Detection AI Web App</a></li>
 <li><a href="pac_analysis.html">PAC Donation Analysis Website</a></li>
 <li><a href="r_package.html">R Tutorial Package Contribution</a></li>
-<li><a href="shanghai_property.html">Shanghai Property Analysis Website</a></li>
+<li><a href="senior_project.html">Senior Project - Neural Network
+Interpreter</a></li>
+<li><a href="shanghai_property.html">Shanghai Property Analysis
+Website</a></li>
 <li><a href="social_justice.html">Social Justice Website</a></li>
 <li><a href="wangwang.html">WeChat Miniprogram - WangWang</a></li>
 <li><a href="wordle.html">Wordle and Quordle Solver</a></li>
 </ul>
 <h2 id="quick-overview">Quick Overview</h2>
-<h3 id="go-to-projects-tab-for-more-details-on-each-individual-project">Go to Projects tab for more details on each individual project</h3>
+<h3
+id="go-to-projects-tab-for-more-details-on-each-individual-project">Go
+to Projects tab for more details on each individual project</h3>
 <div id="covid_analysis">
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/COVID-death-trend.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="covid_analysis.html"><strong>COVID Death Trend Analysis and AI Prediction</strong></a> <br> After an initial analysis of the COVID death trends and trial of basic AI methods, I dive deeper into finding other AI techniques to predict the death trends.</p>
+<p><a href="covid_analysis.html"><strong>COVID Death Trend Analysis and
+AI Prediction</strong></a> <br> After an initial analysis of the COVID
+death trends and trial of basic AI methods, I dive deeper into finding
+other AI techniques to predict the death trends.</p>
 </div>
 <div>
 <hr>
@@ -2136,7 +2192,10 @@ Projects
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/epilepsy-webapp.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p><a href="epilepsy_webapp.html"><strong>Epilepsy Detection AI Web App</strong></a> <br> I hosted an AI I created with friends that determines if someone is experiencing epilepsy based on EEG brain waves.</p>
+<p><a href="epilepsy_webapp.html"><strong>Epilepsy Detection AI Web
+App</strong></a> <br> I hosted an AI I created with friends that
+determines if someone is experiencing epilepsy based on EEG brain
+waves.</p>
 </div>
 <div>
 <hr>
@@ -2145,7 +2204,9 @@ Projects
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/explorantine-main-page.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="explorantine.html"><strong>Hackathon Winning Project - Explorantine</strong></a> <br> Our Hackathon team created a web app to help local businesses bring in customers.</p>
+<p><a href="explorantine.html"><strong>Hackathon Winning Project -
+Explorantine</strong></a> <br> Our Hackathon team created a web app to
+help local businesses bring in customers.</p>
 </div>
 <div>
 <hr>
@@ -2154,7 +2215,9 @@ Projects
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/investment-bot.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p><a href="investment_bot.html"><strong>Investment Bot</strong></a> <br> I created a pipeline that analyzes web data and invests on an Investopedia simulator.</p>
+<p><a href="investment_bot.html"><strong>Investment Bot</strong></a>
+<br> I created a pipeline that analyzes web data and invests on an
+Investopedia simulator.</p>
 </div>
 <div>
 <hr>
@@ -2163,7 +2226,9 @@ Projects
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/mask-webapp.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="mask_webapp.html"><strong>Mask Detection AI Web App</strong></a> <br> I created and hosted an AI on the internet that detects if people are wearing masks in an image.</p>
+<p><a href="mask_webapp.html"><strong>Mask Detection AI Web
+App</strong></a> <br> I created and hosted an AI on the internet that
+detects if people are wearing masks in an image.</p>
 </div>
 <div>
 <hr>
@@ -2172,7 +2237,10 @@ Projects
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/pac-web.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p><a href="pac_analysis.html"><strong>PAC Donation Analysis Website</strong></a> <br> I analyzed and visualized the relationship between foreign-connected company donations with US Congress representation.</p>
+<p><a href="pac_analysis.html"><strong>PAC Donation Analysis
+Website</strong></a> <br> I analyzed and visualized the relationship
+between foreign-connected company donations with US Congress
+representation.</p>
 </div>
 <div>
 <hr>
@@ -2181,45 +2249,71 @@ Projects
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/ppbds-package.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="r_package.html"><strong>R Tutorial Package Contribution</strong></a> <br> Over the summer of 2021, I work with a professor to help improve an R tutorial package.</p>
+<p><a href="r_package.html"><strong>R Tutorial Package
+Contribution</strong></a> <br> Over the summer of 2021, I work with a
+professor to help improve an R tutorial package.</p>
+</div>
+<div>
+<hr>
+</div>
+<div id="senior_project">
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="static/pictures/senior_project_interpreter.png" width="49%" height="20%" style="float:right; padding: 10px;" /></p>
+</div>
+<p><a href="senior_project.html"><strong>Senior Project - Model
+Interpreter</strong></a> <br> For my final spring semester in high
+school, I aimed to create a neural network interpreter as my senior
+project.</p>
 </div>
 <div>
 <hr>
 </div>
 <div id="shanghai_property">
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/shanghai-property.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
+<p><img src="static/pictures/shanghai-property.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="shanghai_property.html"><strong>Shanghai Property Analysis Website</strong></a> <br> I created a website that visualizes the relationship between properties and position in Shanghai.</p>
+<p><a href="shanghai_property.html"><strong>Shanghai Property Analysis
+Website</strong></a> <br> I created a website that visualizes the
+relationship between properties and position in Shanghai.</p>
 </div>
 <div>
 <hr>
 </div>
 <div id="social_justice">
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/takeactionmass.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
+<p><img src="static/pictures/takeactionmass.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p><a href="social_justice.html"><strong>Social Justice Website</strong></a> <br> With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.</p>
+<p><a href="social_justice.html"><strong>Social Justice
+Website</strong></a> <br> With friends, I created a website with the
+purpose of allowing people to find ways to help with social justice
+movements.</p>
 </div>
 <div>
 <hr>
 </div>
 <div id="wangwang">
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/wangwang-main-page.png" width="49%" height="20%" style="float:right; padding: 10px;" /></p>
+<p><img src="static/pictures/wangwang-main-page.png" width="49%" height="20%" style="float:left; padding: 10px;" /></p>
 </div>
-<p><a href="wangwang.html"><strong>WeChat Miniprogram - WangWang</strong></a> <br> With friends, we are creating a WeChat miniprogram accessible to all WeChat users that can match tennis players with others who play in the same area.</p>
+<p><a href="wangwang.html"><strong>WeChat Miniprogram -
+WangWang</strong></a> <br> With friends, we are creating a WeChat
+miniprogram accessible to all WeChat users that can match tennis players
+with others who play in the same area.</p>
 </div>
 <div>
 <hr>
 </div>
 <div id="wordle">
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="static/pictures/official_wordle_solve.png" width="49%" height="20%" style="float:left; padding: 10px;" /></p>
+<p><img src="static/pictures/official_wordle_solve.png" width="49%" height="20%" style="float:right; padding: 10px;" /></p>
 </div>
-<p><a href="wordle.html"><strong>Wordle and Quordle AND OCTORDLE Solver</strong></a> <br> As a fun spring break project, I created an algorithm that can live solve Wordle, Quordle, and Octordle with probability.</p>
+<p><a href="wordle.html"><strong>Wordle and Quordle AND OCTORDLE
+Solver</strong></a> <br> As a fun spring break project, I created an
+algorithm that can live solve Wordle, Quordle, and Octordle with
+probability.</p>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
