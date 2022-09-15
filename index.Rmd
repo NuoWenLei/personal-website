@@ -39,7 +39,6 @@ I hope you find something interesting or just enjoy your time on this website!
 - [R Tutorial Package Contribution](r_package.html)
 - [Senior Project - Neural Network Interpreter](senior_project.html)
 - [Shanghai Property Analysis Website](shanghai_property.html)
-- [Social Justice Website](social_justice.html)
 - [WeChat Miniprogram - WangWang](wangwang.html)
 - [Wordle and Quordle Solver](wordle.html)
 
@@ -145,19 +144,8 @@ knitr::include_graphics("static/pictures/shanghai-property.png")
 <hr>
 </div>
 
-<div id = "social_justice">
-```{r, echo=FALSE,out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
-knitr::include_graphics("static/pictures/takeactionmass.png")
-```
-[**Social Justice Website**](social_justice.html) <br> With friends, I created a website with the purpose of allowing people to find ways to help with social justice movements.
-</div>
-
-<div>
-<hr>
-</div>
-
 <div id = "wangwang">
-```{r, echo=FALSE, out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px;"'}
+```{r, echo=FALSE, out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px;"'}
 knitr::include_graphics("static/pictures/wangwang-main-page.png")
 ```
 [**WeChat Miniprogram - WangWang**](wangwang.html) <br> With friends, we are creating a WeChat miniprogram accessible to all WeChat users that can match tennis players with others who play in the same area.
@@ -168,7 +156,7 @@ knitr::include_graphics("static/pictures/wangwang-main-page.png")
 </div>
 
 <div id = "wordle">
-```{r, echo=FALSE, out.width="49%", out.height="20%", out.extra='style="float:right; padding: 10px;"'}
+```{r, echo=FALSE, out.width="49%", out.height="20%", out.extra='style="float:left; padding: 10px;"'}
 knitr::include_graphics("static/pictures/official_wordle_solve.png")
 ```
 [**Wordle and Quordle AND OCTORDLE Solver**](wordle.html) <br> As a fun spring break project, I created an algorithm that can live solve Wordle, Quordle, and Octordle with probability.

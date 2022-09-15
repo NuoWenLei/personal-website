@@ -29,8 +29,6 @@ navbar:
           href: senior_project.html
         - text: "Shanghai Property Analysis"
           href: shanghai_property.html
-        - text: "Social Justice Website"
-          href: social_justice.html
         - text: "WeChat Miniprogram - WangWang"
           href: wangwang.html
         - text: "Wordle and Quordle AND OCTORDLE Solver"

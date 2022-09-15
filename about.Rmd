@@ -44,7 +44,7 @@ In fact, all the projects presented on this website were created after 2020. Bec
 
 After completing CS50x rather quickly, I took the web development progression of the course, CS50w. In that class, I learned about both front-end development with HTML, CSS, Javascript and back-end with Flask, Django, and SQL.
 
-I was really excited after gaining this new-found knowledge because I was finally able to write programs that went beyond the sandbox. The first project I created was [TakeActionMass](https://www.takeactionmass.com/) in June 2020. Not only was it the culmination of what I had learned in the past 3 months, it also addressed a problem, it sought to make a difference. I'm really proud of it.
+I was really excited after gaining this new-found knowledge because I was finally able to write programs that went beyond the sandbox. The first project I created was TakeActionMass in June 2020. Not only was it the culmination of what I had learned in the past 3 months, it also addressed a problem, it sought to make a difference. I'm really proud of it.
 
 During the process of making that website, I encountered various problems with both front-end and back-end. Back-end especially, I had to struggle through a lot of online database problems and understanding its limitations. This struggle actually sparked my interest in the manipulation and organization of data.
 
