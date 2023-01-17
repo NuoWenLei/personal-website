@@ -1,5 +1,5 @@
 ---
-title: "Personal Projects in High School"
+title: "Personal Projects"
 site: distill::distill_website
 ---
 
@@ -24,7 +24,7 @@ Hello, I'm Nuo Wen Lei from Shanghai, current studying at Brown University, clas
 <br><br>
 I'm also a tennis and squash player ([clip of me playing tennis](https://youtu.be/oCPy2Drd_oQ)) as well as a Japanese-cuisine appreciator with ramen and chicken wings being my favorite.
 <br><br>
-This website is a gallery of the projects I've done in high school. It shows how my interests developed over time from computer science to web design to data science and AI.
+This website is a gallery of the projects I've done. It shows how my interests developed over time from computer science to web design to data science and AI.
 <br><br>
 I hope you find something interesting or just enjoy your time on this website!
 </div>

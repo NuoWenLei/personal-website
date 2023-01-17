@@ -11,22 +11,15 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r, echo=FALSE,out.width="30%", out.height="20%", out.extra='style="float:right; padding: 10px"'}
 knitr::include_graphics("static/pictures/personal_photo.jpg")
 ```
-I'm Nuo Wen Lei from Shanghai, studying in the 2022 class of Concord Academy, MA.
+I'm Nuo Wen Lei from Shanghai, studying in the 2026 class of Brown University.
 
 I have an interest in Computer Science, Data Science, and Behavioral Sciences, and I like to play tennis and squash, watch anime, and eat delicious food!
 </div>
 
-
-Projects I'm currently working on:
-
-- [WangWang](wangwang.html)
-- [AIdvocacy](https://aidvocacy.com) - a nonprofit organization focused on providing free ML and AI education
-- PAC and Media Bias research papers
-
 Ways to reach me:
 
 - [Github](https://github.com/NuoWenLei)
-- [LinkedIn](https://www.linkedin.com/in/nuo-wen-lei-725376207/)
+- [LinkedIn](https://www.linkedin.com/in/nuo-wen-lei/)
 - Email: nuowen0612@gmail.com
 - Instagram: nuowenlei
 - Discord: NuoWenLei#0308
@@ -36,7 +29,7 @@ Sports:
 - Varsity Tennis First Singles in CA. [Here's my tennis video](https://youtu.be/oCPy2Drd_oQ)
 - Varsity Squash Number 1 in CA.
 
-## My Journey
+## My Journey in High School
 
 Before 2020, my experience with coding had been in various kinds of sandbox environments. Inputs were cleanly defined and outputs bore no real meaning or weight. It was a low point for my interest in programming because nothing I made seemed to make a difference.
 

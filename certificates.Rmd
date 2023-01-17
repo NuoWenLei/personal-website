@@ -1,0 +1,32 @@
+---
+title: "Certificates"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+In pursuing my interests in Computer Science, Data Science, and Artificial Intelligence, I completed various online certifications with different universities and organizations.
+
+## Coursera Certifications
+- [IBM - Advanced Data Science](https://coursera.org/verify/specialization/Y4RE34S8NJ6K)
+- [University of Michigan - Applied Data Science with Python](https://coursera.org/verify/specialization/DDSYRX5W8TWJ)
+- [DeepLearning.AI - Machine Learning Engineering for Production (MLOps)](https://coursera.org/verify/specialization/SBSGHRM38V3M)
+
+## EdX Certifications
+- [Harvard CS50X](https://cs50.harvard.edu/certificates/7170ae23-5d15-4643-a02d-5425d0f62c3c)
+- [Harvard CS50W - Web Programming](https://cs50.harvard.edu/certificates/79ac9d34-2f3a-4b21-900a-91c10d698212)
+
+## Other Certifications
+- [Microsoft Technology Associate](https://www.certiport.com/Portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=395&cvid=4kDaLLFpt0nDlDVknXayoQ==)
+
+
+
+
+
+
+
+
+
+
+

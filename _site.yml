@@ -9,6 +9,8 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "Certifications"
+      href: certificates.html
     - text: "Projects"
       menu:
         - text: "COVID Analysis and AI Dev"
