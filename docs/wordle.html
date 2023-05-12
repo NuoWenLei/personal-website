@@ -455,8 +455,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -785,6 +785,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1857,15 +1858,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2064,7 +2071,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2106,6 +2113,7 @@ Projects
 </button>
 <div class="nav-dropdown-content">
 <a href="covid_analysis.html">COVID Analysis and AI Dev</a>
+<a href="cubby.html">Cubby</a>
 <a href="epilepsy_webapp.html">Epilepsy AI Web App</a>
 <a href="explorantine.html">Hackathon Project - Explorantine</a>
 <a href="investment_bot.html">Investment Bot</a>
@@ -2137,23 +2145,12 @@ Projects
 <div class="d-article">
 <p>Associated Links:</p>
 <ul>
-<li><a href="https://github.com/NuoWenLei/Wordle_Solver">GitHub
-Repo</a></li>
-<li><a
-href="https://www.nytimes.com/games/wordle/index.html">Wordle</a></li>
-<li><a href="https://www.devangthakkar.com/wordle_archive/">Wordle
-Archive</a></li>
+<li><a href="https://github.com/NuoWenLei/Wordle_Solver">GitHub Repo</a></li>
+<li><a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a></li>
+<li><a href="https://www.devangthakkar.com/wordle_archive/">Wordle Archive</a></li>
 <li><a href="https://www.quordle.com/#/">Quordle</a></li>
 </ul>
-<p>This is a fun project I played around with over my senior year spring
-break. As the New York Times Wordle game took my school by storm, its
-simple format made me curious about the possibility of creating an
-algorithm to solve it. To start the project, I knew that I had to first
-create some interface for a machine to play Wordle, so, as pastime on a
-flight, I made a text version of Wordle. There is a small difference
-however. While the actual Wordle often displays words that are
-well-known to people, I made my Wordle simply randomly choose a word out
-of all possible 5-letter words.</p>
+<p>This is a fun project I played around with over my senior year spring break. As the New York Times Wordle game took my school by storm, its simple format made me curious about the possibility of creating an algorithm to solve it. To start the project, I knew that I had to first create some interface for a machine to play Wordle, so, as pastime on a flight, I made a text version of Wordle. There is a small difference however. While the actual Wordle often displays words that are well-known to people, I made my Wordle simply randomly choose a word out of all possible 5-letter words.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="static/pictures/text_wordle.png" alt="Text Version of Wordle" width="452" />
@@ -2162,57 +2159,21 @@ Figure 1: Text Version of Wordle
 </p>
 </div>
 </div>
-<p>In the text version, capitalize means the letter is in the right
-place, “*” means the letter is present but in the wrong location, and
-lower case means the letter is not in the word. I also added a “Possible
-Letters” bar for ease of playing.</p>
-<p>After creating the Wordle game, I began to think about how I would
-approach creating a Wordle solver. Part of me wanted to create a
-Reinforcement Learning agent to play the game, but another part of me
-felt that I’ve been doing too much AI-related projects recently. I
-settled on creating a non-AI algorithm that would probabilistically
-choose the optimal words.</p>
+<p>In the text version, capitalize means the letter is in the right place, “*” means the letter is present but in the wrong location, and lower case means the letter is not in the word. I also added a “Possible Letters” bar for ease of playing.</p>
+<p>After creating the Wordle game, I began to think about how I would approach creating a Wordle solver. Part of me wanted to create a Reinforcement Learning agent to play the game, but another part of me felt that I’ve been doing too much AI-related projects recently. I settled on creating a non-AI algorithm that would probabilistically choose the optimal words.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="static/pictures/letter_location_1.png" alt="Exploration of letter-location probability at the first position of a word" width="189" />
 <p class="caption">
-Figure 2: Exploration of letter-location probability at the
-first position of a word
+Figure 2: Exploration of letter-location probability at the first position of a word
 </p>
 </div>
 </div>
-<p>I first made an algorithm that assigned information “rewards” to
-getting a letter correct (3 points), present (2 points), or wrong (1
-point), thereby generating an information reward value for each word in
-the vocabulary. It then simply chose the word with the highest
-information reward. This algorithm created a machine that prioritized
-letters with a high probability of being in that position above all
-else. And while it did work to an extent, it was more of a Wordle
-“attempter” than a Wordle “solver”.</p>
-<p>Now if I really wanted to spin this into a story about personal
-insights and biases, this would be the moral of the story. I assumed
-that a letter in the correct place would always provide more information
-than other results, and in doing so I created an algorithm whose goal
-deviated from the overarching goal.</p>
-<p>Therefore, to improve the machine, firstly I changed the information
-reward as dependent on what percentage of the vocabulary the action
-would eliminate. For example, if getting the word correct eliminates
-half the vocab, its reward for being correct was 1/2. This is somewhat
-of a greedy solution because by evaluating the effect of each letter
-individually, I ignore the percentage of vocabulary that would be
-eliminated by the outcomes of 2 or more letters in the word. This
-overlap-elimination effect, however, is minimal, so I chose to ignore
-the flaw.</p>
-<p>Secondly, I added a bunch of conditionals to make sure that no
-information was wasted. I found that covering all the scenarios where a
-letter that’s present but in the wrong position was quite challenging.
-But one-by-one I found and covered all those edge cases. Finally, I set
-the machine to use the first 5 guesses to eliminate as much of the
-vocabulary as possible and then use the most possible word only for the
-final guess. This allowed the algorithm to truly “solve” Wordle.</p>
-<p>I then created a web interface for the machine to actually play the
-official Wordle. Using the Python module of Selenium, the Wordle solver
-(named Trish) could solve the Wordle live in front of your eyes!</p>
+<p>I first made an algorithm that assigned information “rewards” to getting a letter correct (3 points), present (2 points), or wrong (1 point), thereby generating an information reward value for each word in the vocabulary. It then simply chose the word with the highest information reward. This algorithm created a machine that prioritized letters with a high probability of being in that position above all else. And while it did work to an extent, it was more of a Wordle “attempter” than a Wordle “solver”.</p>
+<p>Now if I really wanted to spin this into a story about personal insights and biases, this would be the moral of the story. I assumed that a letter in the correct place would always provide more information than other results, and in doing so I created an algorithm whose goal deviated from the overarching goal.</p>
+<p>Therefore, to improve the machine, firstly I changed the information reward as dependent on what percentage of the vocabulary the action would eliminate. For example, if getting the word correct eliminates half the vocab, its reward for being correct was 1/2. This is somewhat of a greedy solution because by evaluating the effect of each letter individually, I ignore the percentage of vocabulary that would be eliminated by the outcomes of 2 or more letters in the word. This overlap-elimination effect, however, is minimal, so I chose to ignore the flaw.</p>
+<p>Secondly, I added a bunch of conditionals to make sure that no information was wasted. I found that covering all the scenarios where a letter that’s present but in the wrong position was quite challenging. But one-by-one I found and covered all those edge cases. Finally, I set the machine to use the first 5 guesses to eliminate as much of the vocabulary as possible and then use the most possible word only for the final guess. This allowed the algorithm to truly “solve” Wordle.</p>
+<p>I then created a web interface for the machine to actually play the official Wordle. Using the Python module of Selenium, the Wordle solver (named Trish) could solve the Wordle live in front of your eyes!</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="static/pictures/official_wordle_solve.png" alt="Trish solving Wordle for March 20, 2022" width="801" />
@@ -2221,8 +2182,7 @@ Figure 3: Trish solving Wordle for March 20, 2022
 </p>
 </div>
 </div>
-<p>It can also solve any Wordle archived <a
-href="https://www.devangthakkar.com/wordle_archive/">here</a>.</p>
+<p>It can also solve any Wordle archived <a href="https://www.devangthakkar.com/wordle_archive/">here</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
 <img src="static/pictures/archive_wordle_solve.png" alt="Trish solving Wordle for March 20, 2022" width="824" />
@@ -2231,11 +2191,7 @@ Figure 4: Trish solving Wordle for March 20, 2022
 </p>
 </div>
 </div>
-<p>As a final challenge, I created a separate algorithm that solved <a
-href="https://www.quordle.com/#/">Quordle</a> instead of Wordle (named
-Trisha) by simply adding up the information reward value that could be
-gained from every board and left the last 4 guesses for optimal words.
-And, well, as of now (March 20, 2022), it hasn’t failed yet!</p>
+<p>As a final challenge, I created a separate algorithm that solved <a href="https://www.quordle.com/#/">Quordle</a> instead of Wordle (named Trisha) by simply adding up the information reward value that could be gained from every board and left the last 4 guesses for optimal words. And, well, as of now (March 20, 2022), it hasn’t failed yet!</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
 <img src="static/pictures/quordle_solve.png" alt="Trisha solving Quordle for March 20, 2022" width="672" />
@@ -2244,14 +2200,7 @@ Figure 5: Trisha solving Quordle for March 20, 2022
 </p>
 </div>
 </div>
-<p>Did I say final challenge? I lied. A good friend told me that an
-Octordle exists, so I had to try it out. The previous algorithm actually
-FAILED on its first attempt to solve the daily, and I realized it was
-because the model didn’t prioritize game boards with more vocabulary to
-filter. Therefore, I added a scaling component that multiplies with the
-information reward based on the number of vocabulary for each game
-board. This changes the reward gotten from each game board, allowing the
-solver (now named Patricia) to have a sense of priority or urgency.</p>
+<p>Did I say final challenge? I lied. A good friend told me that an Octordle exists, so I had to try it out. The previous algorithm actually FAILED on its first attempt to solve the daily, and I realized it was because the model didn’t prioritize game boards with more vocabulary to filter. Therefore, I added a scaling component that multiplies with the information reward based on the number of vocabulary for each game board. This changes the reward gotten from each game board, allowing the solver (now named Patricia) to have a sense of priority or urgency.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
 <img src="static/pictures/octordle_solve.png" alt="Patricia solving Octordle for March 20, 2022" width="675" />
@@ -2260,12 +2209,8 @@ Figure 6: Patricia solving Octordle for March 20, 2022
 </p>
 </div>
 </div>
-<p>This just started off as a fun project for over spring break.
-However, it not only helped me brush up on actual hand-coding, but it
-also taught me some good lessons about probabilities and my own
-assumptions!</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>This just started off as a fun project for over spring break. However, it not only helped me brush up on actual hand-coding, but it also taught me some good lessons about probabilities and my own assumptions!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

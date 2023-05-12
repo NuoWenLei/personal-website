@@ -455,8 +455,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -785,6 +785,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1857,15 +1858,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2064,7 +2071,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2106,6 +2113,7 @@ Projects
 </button>
 <div class="nav-dropdown-content">
 <a href="covid_analysis.html">COVID Analysis and AI Dev</a>
+<a href="cubby.html">Cubby</a>
 <a href="epilepsy_webapp.html">Epilepsy AI Web App</a>
 <a href="explorantine.html">Hackathon Project - Explorantine</a>
 <a href="investment_bot.html">Investment Bot</a>
@@ -2137,24 +2145,16 @@ Projects
 <div class="d-article">
 <p>Associated Links:</p>
 <ul>
-<li><a href="https://devpost.com/software/explorantine-nhezvm">Devpost
-Project Showcase</a></li>
-<li><a href="https://github.com/CaspianA1/BBN-Hackathon">Github
-Repo</a></li>
-<li><a href="https://youtu.be/ALz4xrCCu2M">Online Presentation of
-Hackathon Project</a></li>
+<li><a href="https://devpost.com/software/explorantine-nhezvm">Devpost Project Showcase</a></li>
+<li><a href="https://github.com/CaspianA1/BBN-Hackathon">Github Repo</a></li>
+<li><a href="https://youtu.be/ALz4xrCCu2M">Online Presentation of Hackathon Project</a></li>
 </ul>
-<p>Joined by friends from Concord Academy and Middlesex, our team of 4
-took on a one-day hackathon of creating a proof-of-concept web
-project.</p>
-<p>My teammates were: <a href="https://github.com/shreyaj1212">Shreya
-Jain</a> <a href="https://github.com/CaspianA1">Caspian Ahlberg</a> <a
-href="https://github.com/025rhu">Rachel Hu</a></p>
-<p>One of the awards was “Best Small Business Solution”, which was the
-award we were aiming for. Since small businesses were losing a lot of
-customers during the pandemic, we decided to make a web app centered
-around supporting local businesses. It allowed users to search for
-nearby businesses based on their mood or desired activities.</p>
+<p>Joined by friends from Concord Academy and Middlesex, our team of 4 took on a one-day hackathon of creating a proof-of-concept web project.</p>
+<p>My teammates were:
+<a href="https://github.com/shreyaj1212">Shreya Jain</a>
+<a href="https://github.com/CaspianA1">Caspian Ahlberg</a>
+<a href="https://github.com/025rhu">Rachel Hu</a></p>
+<p>One of the awards was “Best Small Business Solution”, which was the award we were aiming for. Since small businesses were losing a lot of customers during the pandemic, we decided to make a web app centered around supporting local businesses. It allowed users to search for nearby businesses based on their mood or desired activities.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="static/pictures/explorantine-main-page.png" alt="Main Page of Explorantine" width="1171" />
@@ -2163,9 +2163,7 @@ Figure 1: Main Page of Explorantine
 </p>
 </div>
 </div>
-<p>The page returns a list of places that are near your location.
-However, since this is a proof of concept, there are a lot of rough
-edges and room for improvement with the results.</p>
+<p>The page returns a list of places that are near your location. However, since this is a proof of concept, there are a lot of rough edges and room for improvement with the results.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="static/pictures/explorantine-results.png" alt="Main Page of Explorantine" width="1167" />
@@ -2174,20 +2172,11 @@ Figure 2: Main Page of Explorantine
 </p>
 </div>
 </div>
-<p>Using Natural Language Processing techniques with NLTK and spaCy as
-well as the Google Places API, we were able to match moods based on user
-input and search for places nearby that fit the user’s desire. It was
-the combination of a lot moving parts but with 10 hours straight of
-working on it, we got it working.</p>
+<p>Using Natural Language Processing techniques with NLTK and spaCy as well as the Google Places API, we were able to match moods based on user input and search for places nearby that fit the user’s desire. It was the combination of a lot moving parts but with 10 hours straight of working on it, we got it working.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ALz4xrCCu2M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
-<p>In the end, we were able to not only win “Best Small Business
-Solution” but also “Best Overall”! It was extremely fun to work on this
-project with friends, and if the opportunity presents itself in the
-future, I’d gladly refine and hopefully publish this project to the
-world!</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>In the end, we were able to not only win “Best Small Business Solution” but also “Best Overall”! It was extremely fun to work on this project with friends, and if the opportunity presents itself in the future, I’d gladly refine and hopefully publish this project to the world!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -455,8 +455,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -785,6 +785,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1857,15 +1858,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2064,7 +2071,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2106,6 +2113,7 @@ Projects
 </button>
 <div class="nav-dropdown-content">
 <a href="covid_analysis.html">COVID Analysis and AI Dev</a>
+<a href="cubby.html">Cubby</a>
 <a href="epilepsy_webapp.html">Epilepsy AI Web App</a>
 <a href="explorantine.html">Hackathon Project - Explorantine</a>
 <a href="investment_bot.html">Investment Bot</a>
@@ -2137,23 +2145,12 @@ Projects
 <div class="d-article">
 <p>Associated Links:</p>
 <ul>
-<li><a href="https://github.com/NuoWenLei/senior_project_stuff">GitHub
-Repo</a></li>
-<li><a
-href="https://docs.google.com/presentation/d/1HTauzC1eWBQXbKCHm5CnlEnE7BqevxECg2qkCQ1kEVA/edit?usp=sharing">School
-Presentation</a></li>
-<li><a href="https://openreview.net/pdf?id=rJY0-Kcll">OPTIMIZATION AS A
-MODEL FOR FEW-SHOT LEARNING</a></li>
-<li><a href="https://arxiv.org/pdf/1706.03762.pdf">ATTENTION IS ALL YOU
-NEED</a></li>
+<li><a href="https://github.com/NuoWenLei/senior_project_stuff">GitHub Repo</a></li>
+<li><a href="https://docs.google.com/presentation/d/1HTauzC1eWBQXbKCHm5CnlEnE7BqevxECg2qkCQ1kEVA/edit?usp=sharing">School Presentation</a></li>
+<li><a href="https://openreview.net/pdf?id=rJY0-Kcll">OPTIMIZATION AS A MODEL FOR FEW-SHOT LEARNING</a></li>
+<li><a href="https://arxiv.org/pdf/1706.03762.pdf">ATTENTION IS ALL YOU NEED</a></li>
 </ul>
-<p>This is the senior project that I dedicated most of my spring
-semester to. The focus is on creating a proof-of-concept AI model that
-can interpret another AI model. Using word embeddings to understand
-features and weights and biases between layers to understand
-relationships between data points and neurons, I wanted to make an AI
-model that can “translate” the AI neuron weights to english, cracking
-open the neural network blackbox.</p>
+<p>This is the senior project that I dedicated most of my spring semester to. The focus is on creating a proof-of-concept AI model that can interpret another AI model. Using word embeddings to understand features and weights and biases between layers to understand relationships between data points and neurons, I wanted to make an AI model that can “translate” the AI neuron weights to english, cracking open the neural network blackbox.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="static/pictures/senior_project_pipeline.png" alt="Interpreter Pipeline Structure" width="677" />
@@ -2162,50 +2159,19 @@ Figure 1: Interpreter Pipeline Structure
 </p>
 </div>
 </div>
-<p>The way I landed on this particular idea was kind of through a
-mishmash of what I wanted to try and what problem I wanted to solve
-(mostly just what I wanted to try). I have always wanted to try making
-models that processed and produced the weirdest inputs and outputs. It
-just seems like when building models that processed images or sequences,
-I just slap on some CNNs or LSTMs and then call it a day, rarely
-contributing anything of my own. Therefore, building this interpreter
-model is in a way like a challenge for myself. However, that is not to
-say there is no application for a model like this.</p>
+<p>The way I landed on this particular idea was kind of through a mishmash of what I wanted to try and what problem I wanted to solve (mostly just what I wanted to try). I have always wanted to try making models that processed and produced the weirdest inputs and outputs. It just seems like when building models that processed images or sequences, I just slap on some CNNs or LSTMs and then call it a day, rarely contributing anything of my own. Therefore, building this interpreter model is in a way like a challenge for myself. However, that is not to say there is no application for a model like this.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="static/pictures/interpretability_comparison.png" alt="Difference in model interpretability between Logistic Regression (ML) and Neural Network (DL)" width="988" />
 <p class="caption">
-Figure 2: Difference in model interpretability between
-Logistic Regression (ML) and Neural Network (DL)
+Figure 2: Difference in model interpretability between Logistic Regression (ML) and Neural Network (DL)
 </p>
 </div>
 </div>
-<p>The image above compares the difference in model complexity and
-therefore interpretability between a logistic regression model and a
-neural network model. You can see that for logistic regression or any
-kind of direct regression model for that matter, each input feature is
-assign a single weightage, representing how that feature contributes to
-the output.</p>
-<p>However look to the right and you’ll see that it’s not as
-straightforward for the neural network. If every line (edge) represents
-a weightage, you’ll see that the neural network has quite a few more
-weightages than the logistic regression model. This is largely due to
-the hidden layers between the inputs and output. These hidden layers
-contain their own neurons whose meanings are defined and refined by the
-model. Therefore, encoded as numbers that only the model that created it
-can understand, neural networks become like blackboxes, incomprehensible
-to humans.</p>
-<p>This interpretability issue actually does impact company decisions to
-utilize and “trust” these machines because often times, especially in
-recent years, the question of equity has been raised to many big data
-models. Companies need to make sure that their models do not treat
-demographics unequitably, and so clarity within the model is very
-important. The neural network’s lack in that area thus often push big
-data companies away from using deep learning solutions and resorting to
-more basic machine learning solutions that produce decent results with
-clarity of feature importance.</p>
-<p>This is the problem I wanted to solve with this model, some kind of
-mediator that can tell humans what the models are thinking.</p>
+<p>The image above compares the difference in model complexity and therefore interpretability between a logistic regression model and a neural network model. You can see that for logistic regression or any kind of direct regression model for that matter, each input feature is assign a single weightage, representing how that feature contributes to the output.</p>
+<p>However look to the right and you’ll see that it’s not as straightforward for the neural network. If every line (edge) represents a weightage, you’ll see that the neural network has quite a few more weightages than the logistic regression model. This is largely due to the hidden layers between the inputs and output. These hidden layers contain their own neurons whose meanings are defined and refined by the model. Therefore, encoded as numbers that only the model that created it can understand, neural networks become like blackboxes, incomprehensible to humans.</p>
+<p>This interpretability issue actually does impact company decisions to utilize and “trust” these machines because often times, especially in recent years, the question of equity has been raised to many big data models. Companies need to make sure that their models do not treat demographics unequitably, and so clarity within the model is very important. The neural network’s lack in that area thus often push big data companies away from using deep learning solutions and resorting to more basic machine learning solutions that produce decent results with clarity of feature importance.</p>
+<p>This is the problem I wanted to solve with this model, some kind of mediator that can tell humans what the models are thinking.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="static/pictures/word_embedding.png" alt="Word Embedding Visualization" width="1046" />
@@ -2214,16 +2180,7 @@ Figure 3: Word Embedding Visualization
 </p>
 </div>
 </div>
-<p>So to make my model understand words, I encoded all the feature names
-into word embeddings, which are vector points that represent word
-relationships within a 300-dimensional vector space. To let my model
-understand word embeddings, I utilized the Multi Head Attention layer
-proposed in the paper, <a
-href="https://arxiv.org/pdf/1706.03762.pdf">ATTENTION IS ALL YOU
-NEED</a> and performed self attention with the layer. This allows the
-model to mix and understand how every dimension of the word embedding
-vectors relate to each other, thereby letting the model gain an even
-more comprehensible understanding of the features.</p>
+<p>So to make my model understand words, I encoded all the feature names into word embeddings, which are vector points that represent word relationships within a 300-dimensional vector space. To let my model understand word embeddings, I utilized the Multi Head Attention layer proposed in the paper, <a href="https://arxiv.org/pdf/1706.03762.pdf">ATTENTION IS ALL YOU NEED</a> and performed self attention with the layer. This allows the model to mix and understand how every dimension of the word embedding vectors relate to each other, thereby letting the model gain an even more comprehensible understanding of the features.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
 <img src="static/pictures/multi_head_attention.png" alt="Multi Head Attention layer structure" width="505" />
@@ -2232,14 +2189,7 @@ Figure 4: Multi Head Attention layer structure
 </p>
 </div>
 </div>
-<p>By combining the understanding of words and linear weights, I created
-2 model types based on the mutability of input order. When thinking
-about how to input the data, I realized that the model shouldn’t need to
-have an immutable input order, as in an arbitrary feature “x” shouldn’t
-always have to be in the same position of the batch. Therefore I first
-created a model structure that didn’t need a determined input order by
-treating one data sample with all the different features and weights as
-a batch with each sample being the corresponding feature and weight.</p>
+<p>By combining the understanding of words and linear weights, I created 2 model types based on the mutability of input order. When thinking about how to input the data, I realized that the model shouldn’t need to have an immutable input order, as in an arbitrary feature “x” shouldn’t always have to be in the same position of the batch. Therefore I first created a model structure that didn’t need a determined input order by treating one data sample with all the different features and weights as a batch with each sample being the corresponding feature and weight.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
 <img src="static/pictures/dynamic_model.png" alt="Interpreter with dynamic input order" width="373" />
@@ -2248,12 +2198,7 @@ Figure 5: Interpreter with dynamic input order
 </p>
 </div>
 </div>
-<p>Then, to see if an interpreter that assumes static input order yields
-any benefits, I created a static version too. This static version also
-takes into account a covariance matrix between features and feature
-weights since it can assume static input order. The point of the matrix
-is that it should allow the interpreter to get a ballpark of where the
-output feature should be in word embedding vector space.</p>
+<p>Then, to see if an interpreter that assumes static input order yields any benefits, I created a static version too. This static version also takes into account a covariance matrix between features and feature weights since it can assume static input order. The point of the matrix is that it should allow the interpreter to get a ballpark of where the output feature should be in word embedding vector space.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
 <img src="static/pictures/static_model.png" alt="Interpreter with static input order" width="423" />
@@ -2262,10 +2207,7 @@ Figure 6: Interpreter with static input order
 </p>
 </div>
 </div>
-<p>In terms of results, the static interpreter succeeded in training,
-continuing to improve even after some 250 steps while the dynamic
-interpreter seems to have plateaued just after some 50 steps of
-training.</p>
+<p>In terms of results, the static interpreter succeeded in training, continuing to improve even after some 250 steps while the dynamic interpreter seems to have plateaued just after some 50 steps of training.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
 <img src="static/pictures/senior_project_train_results.png" alt="Training results of the two interpreters" width="756" />
@@ -2274,8 +2216,7 @@ Figure 7: Training results of the two interpreters
 </p>
 </div>
 </div>
-<p>However, after actually putting the interpreters into a testing
-environment, the results qualitatively changed drastically.</p>
+<p>However, after actually putting the interpreters into a testing environment, the results qualitatively changed drastically.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
 <img src="static/pictures/senior_project_pred_results.png" alt="Prediction results of the two interpreters" width="927" />
@@ -2284,27 +2225,11 @@ Figure 8: Prediction results of the two interpreters
 </p>
 </div>
 </div>
-<p>Both were given a base model that uses many attributes of a wine to
-predict the residual sugar in the wine. While the static interpreter
-repeatedly predicted words that had little to no relation with “residual
-sugar”, the dynamic interpreter has predicted words that are similar to,
-if not exactly, “residual sugar”. I think the difference in training and
-prediction environment results is a testament to how overfitting can be
-such a misleading problem.</p>
-<p>Anyways, to conclude, this was a super fun project, guiding myself
-through everything. I feel like that proof-of-concept stage has been
-reached through this project. And while there are many ways to further
-this project, I don’t think I am skilled enough to pursue many of those
-options. So I’ll put the further exploration of this project on hold and
-see if I can tackle it any better when I return to it.</p>
-<p>If you want to see my presentation for this project, you can <a
-href="https://docs.google.com/presentation/d/1HTauzC1eWBQXbKCHm5CnlEnE7BqevxECg2qkCQ1kEVA/edit?usp=sharing">click
-here</a>.</p>
-<p>And here is the <a
-href="https://github.com/NuoWenLei/senior_project_stuff">GitHub repo</a>
-with code for the project.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Both were given a base model that uses many attributes of a wine to predict the residual sugar in the wine. While the static interpreter repeatedly predicted words that had little to no relation with “residual sugar”, the dynamic interpreter has predicted words that are similar to, if not exactly, “residual sugar”. I think the difference in training and prediction environment results is a testament to how overfitting can be such a misleading problem.</p>
+<p>Anyways, to conclude, this was a super fun project, guiding myself through everything. I feel like that proof-of-concept stage has been reached through this project. And while there are many ways to further this project, I don’t think I am skilled enough to pursue many of those options. So I’ll put the further exploration of this project on hold and see if I can tackle it any better when I return to it.</p>
+<p>If you want to see my presentation for this project, you can <a href="https://docs.google.com/presentation/d/1HTauzC1eWBQXbKCHm5CnlEnE7BqevxECg2qkCQ1kEVA/edit?usp=sharing">click here</a>.</p>
+<p>And here is the <a href="https://github.com/NuoWenLei/senior_project_stuff">GitHub repo</a> with code for the project.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

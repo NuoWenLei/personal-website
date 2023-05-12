@@ -455,8 +455,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -785,6 +785,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1857,15 +1858,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2064,7 +2071,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2106,6 +2113,7 @@ Projects
 </button>
 <div class="nav-dropdown-content">
 <a href="covid_analysis.html">COVID Analysis and AI Dev</a>
+<a href="cubby.html">Cubby</a>
 <a href="epilepsy_webapp.html">Epilepsy AI Web App</a>
 <a href="explorantine.html">Hackathon Project - Explorantine</a>
 <a href="investment_bot.html">Investment Bot</a>
@@ -2140,48 +2148,36 @@ Projects
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/personal_photo.jpg" width="30%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p>Hello, I’m Nuo Wen Lei from Shanghai, current studying at Brown
-University, class of 2026. My personal interests mainly lie in the realm
-of understanding humanities and the world around me through the lens of
-data and logic. <br><br> I’m also a tennis and squash player (<a
-href="https://youtu.be/oCPy2Drd_oQ">clip of me playing tennis</a>) as
-well as a Japanese-cuisine appreciator with ramen and chicken wings
-being my favorite. <br><br> This website is a gallery of the projects
-I’ve done. It shows how my interests developed over time from computer
-science to web design to data science and AI. <br><br> I hope you find
-something interesting or just enjoy your time on this website!</p>
+<p>Hello, I’m Nuo Wen Lei from Shanghai, current studying at Brown University, class of 2026. My personal interests mainly lie in the realm of understanding humanities and the world around me through the lens of data and logic.
+<br><br>
+I’m also a tennis and squash player (<a href="https://youtu.be/oCPy2Drd_oQ">clip of me playing tennis</a>) as well as a Japanese-cuisine appreciator with ramen and chicken wings being my favorite.
+<br><br>
+This website is a gallery of the projects I’ve done. It shows how my interests developed over time from computer science to web design to data science and AI.
+<br><br>
+I hope you find something interesting or just enjoy your time on this website!</p>
 </div>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
-<li><a href="covid_analysis.html">COVID Death Trend Analysis and AI
-Prediction</a></li>
-<li><a href="epilepsy_webapp.html">Epilepsy Detection AI Web
-App</a></li>
-<li><a href="explorantine.html">Hackathon Winning Project -
-Explorantine</a></li>
+<li><a href="covid_analysis.html">COVID Death Trend Analysis and AI Prediction</a></li>
+<li><a href="cubby.html">Cubby - Friend Data Matcher</a></li>
+<li><a href="epilepsy_webapp.html">Epilepsy Detection AI Web App</a></li>
+<li><a href="explorantine.html">Hackathon Winning Project - Explorantine</a></li>
 <li><a href="investment_bot.html">Investment Bot</a></li>
 <li><a href="mask_webapp.html">Mask Detection AI Web App</a></li>
 <li><a href="pac_analysis.html">PAC Donation Analysis Website</a></li>
 <li><a href="r_package.html">R Tutorial Package Contribution</a></li>
-<li><a href="senior_project.html">Senior Project - Neural Network
-Interpreter</a></li>
-<li><a href="shanghai_property.html">Shanghai Property Analysis
-Website</a></li>
+<li><a href="senior_project.html">Senior Project - Neural Network Interpreter</a></li>
+<li><a href="shanghai_property.html">Shanghai Property Analysis Website</a></li>
 <li><a href="wangwang.html">WeChat Miniprogram - WangWang</a></li>
 <li><a href="wordle.html">Wordle and Quordle Solver</a></li>
 </ul>
 <h2 id="quick-overview">Quick Overview</h2>
-<h3
-id="go-to-projects-tab-for-more-details-on-each-individual-project">Go
-to Projects tab for more details on each individual project</h3>
+<h3 id="go-to-projects-tab-for-more-details-on-each-individual-project">Go to Projects tab for more details on each individual project</h3>
 <div id="covid_analysis">
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/COVID-death-trend.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="covid_analysis.html"><strong>COVID Death Trend Analysis and
-AI Prediction</strong></a> <br> After an initial analysis of the COVID
-death trends and trial of basic AI methods, I dive deeper into finding
-other AI techniques to predict the death trends.</p>
+<p><a href="covid_analysis.html"><strong>COVID Death Trend Analysis and AI Prediction</strong></a> <br> After an initial analysis of the COVID death trends and trial of basic AI methods, I dive deeper into finding other AI techniques to predict the death trends.</p>
 </div>
 <div>
 <hr>
@@ -2190,10 +2186,7 @@ other AI techniques to predict the death trends.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/epilepsy-webapp.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p><a href="epilepsy_webapp.html"><strong>Epilepsy Detection AI Web
-App</strong></a> <br> I hosted an AI I created with friends that
-determines if someone is experiencing epilepsy based on EEG brain
-waves.</p>
+<p><a href="epilepsy_webapp.html"><strong>Epilepsy Detection AI Web App</strong></a> <br> I hosted an AI I created with friends that determines if someone is experiencing epilepsy based on EEG brain waves.</p>
 </div>
 <div>
 <hr>
@@ -2202,9 +2195,7 @@ waves.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/explorantine-main-page.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="explorantine.html"><strong>Hackathon Winning Project -
-Explorantine</strong></a> <br> Our Hackathon team created a web app to
-help local businesses bring in customers.</p>
+<p><a href="explorantine.html"><strong>Hackathon Winning Project - Explorantine</strong></a> <br> Our Hackathon team created a web app to help local businesses bring in customers.</p>
 </div>
 <div>
 <hr>
@@ -2213,9 +2204,7 @@ help local businesses bring in customers.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/investment-bot.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p><a href="investment_bot.html"><strong>Investment Bot</strong></a>
-<br> I created a pipeline that analyzes web data and invests on an
-Investopedia simulator.</p>
+<p><a href="investment_bot.html"><strong>Investment Bot</strong></a> <br> I created a pipeline that analyzes web data and invests on an Investopedia simulator.</p>
 </div>
 <div>
 <hr>
@@ -2224,9 +2213,7 @@ Investopedia simulator.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/mask-webapp.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="mask_webapp.html"><strong>Mask Detection AI Web
-App</strong></a> <br> I created and hosted an AI on the internet that
-detects if people are wearing masks in an image.</p>
+<p><a href="mask_webapp.html"><strong>Mask Detection AI Web App</strong></a> <br> I created and hosted an AI on the internet that detects if people are wearing masks in an image.</p>
 </div>
 <div>
 <hr>
@@ -2235,10 +2222,7 @@ detects if people are wearing masks in an image.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/pac-web.png" width="49%" height="20%" style="float:right; padding: 10px" /></p>
 </div>
-<p><a href="pac_analysis.html"><strong>PAC Donation Analysis
-Website</strong></a> <br> I analyzed and visualized the relationship
-between foreign-connected company donations with US Congress
-representation.</p>
+<p><a href="pac_analysis.html"><strong>PAC Donation Analysis Website</strong></a> <br> I analyzed and visualized the relationship between foreign-connected company donations with US Congress representation.</p>
 </div>
 <div>
 <hr>
@@ -2247,9 +2231,7 @@ representation.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/ppbds-package.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="r_package.html"><strong>R Tutorial Package
-Contribution</strong></a> <br> Over the summer of 2021, I work with a
-professor to help improve an R tutorial package.</p>
+<p><a href="r_package.html"><strong>R Tutorial Package Contribution</strong></a> <br> Over the summer of 2021, I work with a professor to help improve an R tutorial package.</p>
 </div>
 <div>
 <hr>
@@ -2258,10 +2240,7 @@ professor to help improve an R tutorial package.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/senior_project_interpreter.png" width="49%" height="20%" style="float:right; padding: 10px;" /></p>
 </div>
-<p><a href="senior_project.html"><strong>Senior Project - Model
-Interpreter</strong></a> <br> For my final spring semester in high
-school, I aimed to create a neural network interpreter as my senior
-project.</p>
+<p><a href="senior_project.html"><strong>Senior Project - Model Interpreter</strong></a> <br> For my final spring semester in high school, I aimed to create a neural network interpreter as my senior project.</p>
 </div>
 <div>
 <hr>
@@ -2270,9 +2249,7 @@ project.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/shanghai-property.png" width="49%" height="20%" style="float:left; padding: 10px" /></p>
 </div>
-<p><a href="shanghai_property.html"><strong>Shanghai Property Analysis
-Website</strong></a> <br> I created a website that visualizes the
-relationship between properties and position in Shanghai.</p>
+<p><a href="shanghai_property.html"><strong>Shanghai Property Analysis Website</strong></a> <br> I created a website that visualizes the relationship between properties and position in Shanghai.</p>
 </div>
 <div>
 <hr>
@@ -2281,10 +2258,7 @@ relationship between properties and position in Shanghai.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/wangwang-main-page.png" width="49%" height="20%" style="float:right; padding: 10px;" /></p>
 </div>
-<p><a href="wangwang.html"><strong>WeChat Miniprogram -
-WangWang</strong></a> <br> With friends, we are creating a WeChat
-miniprogram accessible to all WeChat users that can match tennis players
-with others who play in the same area.</p>
+<p><a href="wangwang.html"><strong>WeChat Miniprogram - WangWang</strong></a> <br> With friends, we are creating a WeChat miniprogram accessible to all WeChat users that can match tennis players with others who play in the same area.</p>
 </div>
 <div>
 <hr>
@@ -2293,13 +2267,18 @@ with others who play in the same area.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="static/pictures/official_wordle_solve.png" width="49%" height="20%" style="float:left; padding: 10px;" /></p>
 </div>
-<p><a href="wordle.html"><strong>Wordle and Quordle AND OCTORDLE
-Solver</strong></a> <br> As a fun spring break project, I created an
-algorithm that can live solve Wordle, Quordle, and Octordle with
-probability.</p>
+<p><a href="wordle.html"><strong>Wordle and Quordle AND OCTORDLE Solver</strong></a> <br> As a fun spring break project, I created an algorithm that can live solve Wordle, Quordle, and Octordle with probability.</p>
 </div>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div>
+<hr>
+</div>
+<div id="cubby">
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="static/pictures/official_wordle_solve.png" width="49%" height="20%" style="float:right; padding: 10px;" /></p>
+</div>
+<p><a href="cubby.html"><strong>Cubby</strong></a> <br> As part of my software engineering class (CS0320), my team created a data matching website that matches people into friend groups based on similarities in questionnaire answers.</p>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

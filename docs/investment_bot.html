@@ -455,8 +455,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 
   <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet"/>
   <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
   <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
   <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
@@ -785,6 +785,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1857,15 +1858,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2064,7 +2071,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2106,6 +2113,7 @@ Projects
 </button>
 <div class="nav-dropdown-content">
 <a href="covid_analysis.html">COVID Analysis and AI Dev</a>
+<a href="cubby.html">Cubby</a>
 <a href="epilepsy_webapp.html">Epilepsy AI Web App</a>
 <a href="explorantine.html">Hackathon Project - Explorantine</a>
 <a href="investment_bot.html">Investment Bot</a>
@@ -2135,12 +2143,8 @@ Projects
 
 
 <div class="d-article">
-<p>This project started off as a personal challenge. During 2020, I took
-a lot of online courses through sites like EdX and Coursera ranging from
-web development to data science.</p>
-<p>I’ve made websites at this point, but I’ve never really applied my
-study in data science. This was essentially my first data science
-project.</p>
+<p>This project started off as a personal challenge. During 2020, I took a lot of online courses through sites like EdX and Coursera ranging from web development to data science.</p>
+<p>I’ve made websites at this point, but I’ve never really applied my study in data science. This was essentially my first data science project.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="static/pictures/investment-yahoo.png" alt="Yahoo Finance page for the stock AXS" width="926" />
@@ -2149,10 +2153,7 @@ Figure 1: Yahoo Finance page for the stock AXS
 </p>
 </div>
 </div>
-<p>Using python and its various libraries, I created a simple pipeline
-to extract and analyze online data and then invest based on its results.
-Then I attached this pipeline to a web server that will run this
-pipeline every week.</p>
+<p>Using python and its various libraries, I created a simple pipeline to extract and analyze online data and then invest based on its results. Then I attached this pipeline to a web server that will run this pipeline every week.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="static/pictures/investment-pipeline.png" alt="Visualization of investment pipeline" width="843" />
@@ -2161,21 +2162,10 @@ Figure 2: Visualization of investment pipeline
 </p>
 </div>
 </div>
-<p><strong>Data Webscrape</strong> - The pipeline starts by taking
-various numerical and textual data from multiple online sources.</p>
-<p><strong>Data Cleaning and Processing</strong> - The data is then
-cleaned for processing use since these online sources meant for the data
-to be presented to people and not machines. In this section, features
-like market cap values are also created based on their non-numeric
-displays on websites.</p>
-<p><strong>Investment Decision with ML</strong> - Using previously
-collected data, many different ML models are trained, each with a
-different model-scaler pairing. The pair with the highest evaluation
-score is selected to transform the new data. Based on the confidence
-level of the predictions, the pipeline invests in the top 5 stock
-symbols on an Investopedia simulator</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p><strong>Data Webscrape</strong> - The pipeline starts by taking various numerical and textual data from multiple online sources.</p>
+<p><strong>Data Cleaning and Processing</strong> - The data is then cleaned for processing use since these online sources meant for the data to be presented to people and not machines. In this section, features like market cap values are also created based on their non-numeric displays on websites.</p>
+<p><strong>Investment Decision with ML</strong> - Using previously collected data, many different ML models are trained, each with a different model-scaler pairing. The pair with the highest evaluation score is selected to transform the new data. Based on the confidence level of the predictions, the pipeline invests in the top 5 stock symbols on an Investopedia simulator</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
